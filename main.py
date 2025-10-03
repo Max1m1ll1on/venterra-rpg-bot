@@ -15,7 +15,7 @@ from src.config.settings import settings, LOGS_DIR
 from src.database import Database
 
 # Імпорт handlers
-from src.handlers import start, city, inventory, battle, shop, tavern
+from src.handlers import start, city, inventory, battle, shop, tavern, guild
 
 # Переконуємось що папка logs існує
 import os
@@ -70,6 +70,7 @@ async def main():
         dp.include_router(tavern.router)
         dp.include_router(inventory.router)
         dp.include_router(shop.router)
+        dp.include_router(guild.router)
         dp.include_router(battle.router)     # Battle ОСТАННІЙ
         
         logger.info("✅ Бот успішно налаштований")

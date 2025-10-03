@@ -14,7 +14,8 @@ router = Router()
 logger = logging.getLogger(__name__)
 
 
-# ==================== ПЕРСОНАЖ ====================
+# Замініть обробники у src/handlers/city.py
+# Використовуємо існуючі callback'и з keyboards.py: char_stats, char_quests, char_achievements
 
 @router.message(F.text == "👤 Персонаж")
 async def show_character(message: types.Message):
@@ -42,6 +43,13 @@ async def show_character(message: types.Message):
     
     player = Player.from_dict(player_data)
     
+    # ✨ НОВЕ: Застосовуємо офлайн регенерацію
+    regen_result = player.apply_offline_regeneration()
+    
+    # Зберігаємо оновлений стан
+    if regen_result["hp"] > 0 or regen_result["mana"] > 0:
+        await db.save_player(player.to_dict())
+    
     # Розраховуємо прогрес до наступного рівня
     exp_needed = player.get_required_experience()
     exp_progress = (player.experience / exp_needed * 100) if exp_needed > 0 else 100
@@ -52,7 +60,218 @@ async def show_character(message: types.Message):
         f"👤 **{player.character_name}**\n"
         f"🏅 Клас: {CLASS_NAMES[player.character_class]}\n"
         f"⭐ Рівень: {player.level}\n\n"
+    )
+    
+    # ✨ НОВЕ: Показуємо повідомлення про регенерацію
+    if regen_result["hp"] > 0 or regen_result["mana"] > 0:
+        offline_minutes = regen_result["offline_time"] // 60
+        char_info += f"💤 Ви відпочивали {offline_minutes} хв\n"
+        if regen_result["hp"] > 0:
+            char_info += f"💚 Відновлено {regen_result['hp']} HP\n"
+        if regen_result["mana"] > 0:
+            char_info += f"💙 Відновлено {regen_result['mana']} мани\n"
+        char_info += "\n"
+    
+    char_info += (
         f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+        f"💙 Мана: {player.mana}/{player.max_mana}\n"
+        f"💰 Золото: {player.gold}\n\n"
+        f"📊 **Характеристики:**\n"
+        f"💪 Сила: {player.strength}\n"
+        f"🏃 Спритність: {player.agility}\n"
+        f"🧠 Інтелект: {player.intelligence}\n"
+        f"🛡️ Витривалість: {player.stamina}\n"
+        f"🎭 Харизма: {player.charisma}\n"
+    )
+    
+    if player.free_points > 0:
+        char_info += f"\n✨ Вільних очок: {player.free_points}\n"
+    
+    char_info += (
+        f"\n⚔️ Бонус атаки: +{player.get_attack_bonus()}\n"
+        f"🛡️ Клас броні (AC): {player.get_armor_class()}\n"
+        f"🗡️ Захист: {player.get_defense()}\n"
+        f"💨 Шанс ухилення: {player.get_dodge_chance():.1f}%\n\n"
+        f"🎯 Досвід: {player.experience}/{exp_needed}\n"
+        f"{progress_bar} {exp_progress:.1f}%"
+    )
+    
+    await message.answer(
+        char_info,
+        reply_markup=get_character_keyboard(),
+        parse_mode="Markdown"
+    )
+
+
+# ==================== СТАТИСТИКА ====================
+
+@router.callback_query(F.data == "char_stats")
+async def show_character_stats(callback: types.CallbackQuery):
+    """Показує детальну статистику персонажа"""
+    db = Database()
+    player_data = await db.get_player(callback.from_user.id)
+    
+    if not player_data:
+        await callback.answer("❌ Помилка!", show_alert=True)
+        return
+    
+    player = Player.from_dict(player_data)
+    
+    # Розраховуємо додаткові дані
+    total_battles = player.monsters_killed
+    avg_damage_dealt = int(player.total_damage_dealt / total_battles) if total_battles > 0 else 0
+    avg_damage_taken = int(player.total_damage_taken / total_battles) if total_battles > 0 else 0
+    
+    stats_text = (
+        f"📊 **Статистика {player.character_name}**\n\n"
+        f"⚔️ **Бойова статистика:**\n"
+        f"👹 Монстрів убито: {player.monsters_killed}\n"
+        f"⚔️ Всього завдано урону: {player.total_damage_dealt}\n"
+        f"🩹 Всього отримано урону: {player.total_damage_taken}\n"
+        f"📈 Середній урон за бій: {avg_damage_dealt}\n"
+        f"📉 Середній урон отримано: {avg_damage_taken}\n\n"
+        f"💰 **Економіка:**\n"
+        f"💰 Поточне золото: {player.gold}\n"
+        f"💎 Всього заробили: {player.total_gold_earned}\n"
+        f"💸 Всього витрачено: {player.total_gold_earned - player.gold}\n\n"
+        f"📋 **Прогресія:**\n"
+        f"⭐ Рівень: {player.level}\n"
+        f"🎯 Досвід: {player.experience}/{player.get_required_experience()}\n"
+        f"📜 Квестів виконано: {player.quests_completed}\n"
+        f"🏆 Досягнень: {len(player.achievements)}"
+    )
+    
+    # Кнопка назад
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
+        [types.InlineKeyboardButton(text="🔙 Назад до персонажа", callback_data="char_back")]
+    ])
+    
+    await callback.message.edit_text(
+        stats_text,
+        reply_markup=keyboard,
+        parse_mode="Markdown"
+    )
+    await callback.answer()
+
+
+# ==================== КВЕСТИ ====================
+
+@router.callback_query(F.data == "char_quests")
+async def show_character_quests(callback: types.CallbackQuery):
+    """Показує активні квести персонажа"""
+    db = Database()
+    player_data = await db.get_player(callback.from_user.id)
+    
+    if not player_data:
+        await callback.answer("❌ Помилка!", show_alert=True)
+        return
+    
+    player = Player.from_dict(player_data)
+    
+    # Перевіряємо наявність квестів
+    if not player.quests or len(player.quests) == 0:
+        quests_text = (
+            f"🎯 **Квести {player.character_name}**\n\n"
+            f"У вас немає активних квестів.\n\n"
+            f"💡 Відвідайте 🏰 Гільдію для отримання квестів!"
+        )
+    else:
+        quests_text = f"🎯 **Активні квести:**\n\n"
+        
+        for quest_id, quest_data in player.quests.items():
+            if quest_data.get("status") == "active":
+                quest_name = quest_data.get("name", "Невідомий квест")
+                progress = quest_data.get("progress", 0)
+                target = quest_data.get("target", 1)
+                
+                # Прогрес-бар для квесту
+                quest_progress = int((progress / target) * 10) if target > 0 else 0
+                quest_bar = "█" * quest_progress + "░" * (10 - quest_progress)
+                
+                quests_text += f"🔸 **{quest_name}**\n"
+                quests_text += f"   {quest_bar} {progress}/{target}\n\n"
+        
+        if "🔸" not in quests_text:
+            quests_text += "Всі квести виконано! Поверніться до гільдії.\n"
+    
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
+        [types.InlineKeyboardButton(text="🔙 Назад до персонажа", callback_data="char_back")]
+    ])
+    
+    await callback.message.edit_text(
+        quests_text,
+        reply_markup=keyboard,
+        parse_mode="Markdown"
+    )
+    await callback.answer()
+
+
+# ==================== ДОСЯГНЕННЯ ====================
+
+@router.callback_query(F.data == "char_achievements")
+async def show_character_achievements(callback: types.CallbackQuery):
+    """Показує досягнення персонажа"""
+    db = Database()
+    player_data = await db.get_player(callback.from_user.id)
+    
+    if not player_data:
+        await callback.answer("❌ Помилка!", show_alert=True)
+        return
+    
+    player = Player.from_dict(player_data)
+    
+    if not player.achievements or len(player.achievements) == 0:
+        achievements_text = (
+            f"🏆 **Досягнення {player.character_name}**\n\n"
+            f"У вас поки немає досягнень.\n\n"
+            f"💡 Продовжуйте грати щоб розблокувати досягнення!"
+        )
+    else:
+        achievements_text = f"🏆 **Ваші досягнення:**\n\n"
+        
+        for achievement in player.achievements:
+            achievement_name = achievement.get("name", "Досягнення")
+            achievement_desc = achievement.get("description", "")
+            
+            achievements_text += f"🏅 **{achievement_name}**\n"
+            achievements_text += f"   {achievement_desc}\n\n"
+    
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
+        [types.InlineKeyboardButton(text="🔙 Назад до персонажа", callback_data="char_back")]
+    ])
+    
+    await callback.message.edit_text(
+        achievements_text,
+        reply_markup=keyboard,
+        parse_mode="Markdown"
+    )
+    await callback.answer()
+
+
+# ==================== ПОВЕРНЕННЯ ====================
+
+@router.callback_query(F.data == "char_back")
+async def character_back(callback: types.CallbackQuery):
+    """Повертає до головного меню персонажа"""
+    db = Database()
+    player_data = await db.get_player(callback.from_user.id)
+    
+    if not player_data:
+        await callback.answer("❌ Помилка!", show_alert=True)
+        return
+    
+    player = Player.from_dict(player_data)
+    
+    exp_needed = player.get_required_experience()
+    exp_progress = (player.experience / exp_needed * 100) if exp_needed > 0 else 100
+    progress_bar = "█" * int(exp_progress / 10) + "░" * (10 - int(exp_progress / 10))
+    
+    char_info = (
+        f"👤 **{player.character_name}**\n"
+        f"🏅 Клас: {CLASS_NAMES[player.character_class]}\n"
+        f"⭐ Рівень: {player.level}\n\n"
+        f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+        f"💙 Мана: {player.mana}/{player.max_mana}\n"
         f"💰 Золото: {player.gold}\n\n"
         f"📊 **Характеристики:**\n"
         f"💪 Сила: {player.strength}\n"
@@ -68,22 +287,18 @@ async def show_character(message: types.Message):
     char_info += (
         f"\n⚔️ Сила атаки: {player.get_attack_power()}\n"
         f"🛡️ Захист: {player.get_defense()}\n"
+        f"🎯 AC (Armor Class): {player.get_armor_class()}\n"
         f"💨 Шанс ухилення: {player.get_dodge_chance():.1f}%\n\n"
         f"🎯 Досвід: {player.experience}/{exp_needed}\n"
-        f"{progress_bar} {exp_progress:.1f}%\n\n"
-        f"📈 **Статистика:**\n"
-        f"👹 Монстрів убито: {player.monsters_killed}\n"
-        f"📋 Квестів виконано: {player.quests_completed}\n"
-        f"💰 Всього заробили: {player.total_gold_earned}\n"
-        f"⚔️ Завдано урону: {player.total_damage_dealt}\n"
-        f"🩹 Отримано урону: {player.total_damage_taken}"
+        f"{progress_bar} {exp_progress:.1f}%"
     )
     
-    await message.answer(
+    await callback.message.edit_text(
         char_info,
         reply_markup=get_character_keyboard(),
         parse_mode="Markdown"
     )
+    await callback.answer()
 
 
 # ==================== ЛІКАР ====================
@@ -420,10 +635,10 @@ async def explore_world(message: types.Message):
 
 @router.message(F.text == "🏰 Повернутися до міста")
 async def return_to_city_button(message: types.Message):
-    """Повертає гравця до міста через кнопку"""
+    """Повернення до міста через кнопку"""
     user_id = message.from_user.id
     
-    # Перевіряємо чи гравець у бою
+    # Перевіряємо чи не в бою
     from src.handlers.battle import active_battles
     if user_id in active_battles:
         await message.answer(
@@ -434,20 +649,39 @@ async def return_to_city_button(message: types.Message):
         )
         return
     
-    # Регенеруємо здоров'я при поверненні
+    # ✨ ВИПРАВЛЕНО: Застосовуємо офлайн регенерацію (на основі часу)
     db = Database()
     player_data = await db.get_player(user_id)
     
     if player_data:
         player = Player.from_dict(player_data)
-        regen = player.regenerate_health(in_combat=False)
+        
+        # Застосовуємо регенерацію на основі ЧАСУ
+        regen_result = player.apply_offline_regeneration()
+        
+        # Зберігаємо
         await db.save_player(player.to_dict())
         
-        await message.answer(
-            f"🏰 **Ви повернулися до міста StaryFall**\n\n"
+        # Формуємо повідомлення
+        city_text = f"🏰 **Ви повернулися до міста StaryFall**\n\n"
+        
+        # Показуємо регенерацію тільки якщо вона була
+        if regen_result["hp"] > 0 or regen_result["mana"] > 0:
+            city_text += "💤 Під час відпочинку:\n"
+            if regen_result["hp"] > 0:
+                city_text += f"💚 Відновлено {regen_result['hp']} HP\n"
+            if regen_result["mana"] > 0:
+                city_text += f"💙 Відновлено {regen_result['mana']} мани\n"
+            city_text += "\n"
+        
+        city_text += (
             f"Тут ви можете відпочити та підготуватися до нових пригод!\n\n"
-            f"💚 Відновлено {regen} HP\n"
-            f"❤️ Здоров'я: {player.health}/{player.max_health}",
+            f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+            f"💙 Мана: {player.mana}/{player.max_mana}"
+        )
+        
+        await message.answer(
+            city_text,
             reply_markup=get_city_keyboard(),
             parse_mode="Markdown"
         )

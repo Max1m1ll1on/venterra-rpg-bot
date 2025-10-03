@@ -11,6 +11,8 @@ from src.models.monster import Monster
 from src.utils.dice import DiceRoller, CombatCalculator, BattleText
 from src.ui.keyboards import get_city_keyboard, get_adventure_main_keyboard
 from src.config.constants import LOCATIONS
+from src.utils.skill_checks import SkillCheck, get_random_event
+from src.models.quest import Quest, QuestStatus
 
 router = Router()
 logger = logging.getLogger(__name__)
@@ -18,6 +20,45 @@ logger = logging.getLogger(__name__)
 # Активні бої
 active_battles = {}
 
+def update_player_quests(player, event_type: str, event_detail: str = None):
+    """
+    Оновлює прогрес квестів гравця
+    
+    Args:
+        player: Об'єкт гравця
+        event_type: Тип події ("kill", "survive")
+        event_detail: Деталі (тип монстра, локація)
+    """
+    if not player.quests:
+        return []
+    
+    completed_quests = []
+    
+    for quest_id, quest_data in player.quests.items():
+        # Пропускаємо неактивні квести
+        if quest_data.get("status") != "active":
+            continue
+        
+        quest = Quest.from_dict(quest_data)
+        
+        # Перевіряємо тип квесту
+        if quest.quest_type.value != event_type:
+            continue
+        
+        # Перевіряємо деталі (якщо є)
+        if quest.target_detail and quest.target_detail != event_detail:
+            continue
+        
+        # Оновлюємо прогрес
+        was_completed = quest.update_progress(1)
+        
+        # Оновлюємо в даних гравця
+        player.quests[quest_id] = quest.to_dict()
+        
+        if was_completed:
+            completed_quests.append(quest)
+    
+    return completed_quests
 
 class BattleState:
     """Стан бою з додатковими полями для D&D"""
@@ -119,7 +160,7 @@ async def show_adventures(message: types.Message):
         f"👤 {player.character_name} (Рів. {player.level})\n"
         f"❤️ HP: {player.health}/{player.max_health}\n"
         f"💙 Мана: {player.mana}/{player.max_mana}\n"
-        f"⚔️ Сила атаки: {player.get_attack_power()}\n"
+        f"⚔️ Бонус атаки: +{player.get_attack_bonus()}\n"
         f"🛡️ AC: {player.get_armor_class()}\n\n"
         f"Ви готові до пригод! Використовуйте кнопки нижче."
     )
@@ -178,19 +219,39 @@ async def return_to_city_button(message: types.Message):
         )
         return
     
+    # ✨ ВИПРАВЛЕНО: Застосовуємо офлайн регенерацію (на основі часу)
     db = Database()
     player_data = await db.get_player(user_id)
     
     if player_data:
         player = Player.from_dict(player_data)
-        regen = player.regenerate_health(in_combat=False)
+        
+        # Застосовуємо регенерацію на основі ЧАСУ
+        regen_result = player.apply_offline_regeneration()
+        
+        # Зберігаємо
         await db.save_player(player.to_dict())
         
-        await message.answer(
-            f"🏰 **Ви повернулися до міста StaryFall**\n\n"
+        # Формуємо повідомлення
+        city_text = f"🏰 **Ви повернулися до міста StaryFall**\n\n"
+        
+        # Показуємо регенерацію тільки якщо вона була
+        if regen_result["hp"] > 0 or regen_result["mana"] > 0:
+            city_text += "💤 Під час відпочинку:\n"
+            if regen_result["hp"] > 0:
+                city_text += f"💚 Відновлено {regen_result['hp']} HP\n"
+            if regen_result["mana"] > 0:
+                city_text += f"💙 Відновлено {regen_result['mana']} мани\n"
+            city_text += "\n"
+        
+        city_text += (
             f"Тут ви можете відпочити та підготуватися до нових пригод!\n\n"
-            f"💚 Відновлено {regen} HP\n"
-            f"❤️ Здоров'я: {player.health}/{player.max_health}",
+            f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+            f"💙 Мана: {player.mana}/{player.max_mana}"
+        )
+        
+        await message.answer(
+            city_text,
             reply_markup=get_city_keyboard(),
             parse_mode="Markdown"
         )
@@ -214,7 +275,7 @@ async def return_to_city(callback: types.CallbackQuery):
 
 @router.callback_query(F.data.startswith("explore_"))
 async def explore_location(callback: types.CallbackQuery):
-    """Створює зустріч з монстром"""
+    """Дослідження локації з можливістю skill check"""
     location_id = callback.data.replace("explore_", "")
     
     if location_id not in LOCATIONS:
@@ -231,6 +292,67 @@ async def explore_location(callback: types.CallbackQuery):
         await callback.answer(f"❌ Потрібен {location['level_required']} рівень!", show_alert=True)
         return
     
+    # ✨ НОВЕ: 30% шанс на випадкову подію
+    if random.random() < 0.3:
+        event = get_random_event(location_id)
+        if event:
+            await show_skill_check_event(callback, location_id, location, event)
+            return
+    
+    # Якщо події немає - звичайний бій
+    await start_monster_encounter(callback, location_id, location, player)
+
+
+# ============================================================
+# КРОК 3: ДОДАТИ нові функції ПІСЛЯ explore_location
+# ============================================================
+
+async def show_skill_check_event(callback: types.CallbackQuery, location_id: str, location: dict, event: dict):
+    """Показує подію зі skill check"""
+    
+    stat_names = {
+        "strength": "💪 Сила",
+        "agility": "🏃 Спритність",
+        "intelligence": "🧠 Інтелект",
+        "stamina": "🛡️ Витривалість",
+        "charisma": "🎭 Харизма"
+    }
+    
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
+        [types.InlineKeyboardButton(
+            text=f"🎲 Спробувати ({stat_names[event['stat']]})",
+            callback_data=f"skill_check_{location_id}_{event['stat']}"
+        )],
+        [types.InlineKeyboardButton(
+            text="↩️ Пропустити",
+            callback_data=f"skip_event_{location_id}"
+        )]
+    ])
+    
+    event_text = (
+        f"{location['emoji']} **{location['name']}**\n\n"
+        f"**{event['name']}**\n\n"
+        f"{event['description']}\n\n"
+        f"🎯 Потрібна перевірка: {stat_names[event['stat']]}\n"
+        f"📊 Складність: DC {event['dc']}\n\n"
+        f"Що робитимете?"
+    )
+    
+    # Зберігаємо подію для наступної дії
+    if not hasattr(explore_location, 'active_events'):
+        explore_location.active_events = {}
+    explore_location.active_events[callback.from_user.id] = event
+    
+    await callback.message.edit_text(
+        event_text,
+        reply_markup=keyboard,
+        parse_mode="Markdown"
+    )
+    await callback.answer()
+
+
+async def start_monster_encounter(callback: types.CallbackQuery, location_id: str, location: dict, player):
+    """Створює зустріч з монстром"""
     available_monsters = location.get("monsters", ["wolf"])
     monster_type = random.choice(available_monsters)
     monster_level = max(1, player.level + random.randint(-1, 1))
@@ -238,6 +360,13 @@ async def explore_location(callback: types.CallbackQuery):
     
     battle_state = BattleState(player, monster)
     active_battles[callback.from_user.id] = battle_state
+    
+    # ✨ НОВЕ: Оновлюємо квести типу "survive"
+    update_player_quests(player, "survive", location_id)
+    
+    # Зберігаємо оновлений прогрес
+    db = Database()
+    await db.save_player(player.to_dict())
     
     encounter_text = (
         f"{location['emoji']} **{location['name']}**\n\n"
@@ -262,9 +391,110 @@ async def explore_location(callback: types.CallbackQuery):
     await callback.answer()
 
 
+@router.callback_query(F.data.startswith("skill_check_"))
+async def handle_skill_check(callback: types.CallbackQuery):
+    """Обробка спроби skill check"""
+    parts = callback.data.split("_")
+    location_id = parts[2]
+    stat_type = parts[3]
+    
+    # Отримуємо збережену подію
+    event = getattr(explore_location, 'active_events', {}).get(callback.from_user.id)
+    if not event:
+        await callback.answer("❌ Подія не знайдена!")
+        return
+    
+    db = Database()
+    player_data = await db.get_player(callback.from_user.id)
+    player = Player.from_dict(player_data)
+    
+    # Отримуємо значення стату
+    stat_value = getattr(player, stat_type, 10)
+    
+    # Виконуємо перевірку
+    d20, total, success = SkillCheck.roll_check(stat_value, event['dc'])
+    check_desc = SkillCheck.get_check_description(d20, total, event['dc'], success)
+    
+    result_text = f"🎲 **Перевірка!**\n\n{check_desc}\n\n"
+    
+    # Застосовуємо результат
+    if success or d20 == 20:  # Критичний успіх завжди працює
+        reward = event['success_reward']
+        result_text += f"✨ {reward['message']}\n\n"
+        
+        if 'gold' in reward:
+            player.add_gold(reward['gold'])
+            result_text += f"💰 +{reward['gold']} золота\n"
+        
+        if 'exp' in reward:
+            exp_result = player.add_experience(reward['exp'])
+            result_text += f"⭐ +{reward['exp']} досвіду\n"
+            if exp_result['leveled_up']:
+                result_text += f"🎊 **НОВИЙ РІВЕНЬ {exp_result['new_level']}!**\n"
+        
+        if 'heal' in reward:
+            healed = player.heal(reward['heal'])
+            result_text += f"❤️ +{healed} HP\n"
+        
+        if 'item' in reward:
+            result_text += f"📦 Ви знайшли цінний предмет!\n"
+    
+    else:  # Провал
+        penalty = event['fail_penalty']
+        result_text += f"💔 {penalty['message']}\n\n"
+        
+        if 'damage' in penalty:
+            damage = penalty['damage']
+            player.health -= damage
+            player.health = max(1, player.health)  # Мінімум 1 HP
+            player.total_damage_taken += damage
+            result_text += f"💔 -{damage} HP\n"
+    
+    result_text += f"\n❤️ Здоров'я: {player.health}/{player.max_health}"
+    
+    # Зберігаємо зміни
+    await db.save_player(player.to_dict())
+    
+    # Очищуємо збережену подію
+    if hasattr(explore_location, 'active_events') and callback.from_user.id in explore_location.active_events:
+        del explore_location.active_events[callback.from_user.id]
+    
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
+        [types.InlineKeyboardButton(
+            text="🌲 Продовжити дослідження",
+            callback_data="continue_adventure"
+        )]
+    ])
+    
+    await callback.message.edit_text(
+        result_text,
+        reply_markup=keyboard,
+        parse_mode="Markdown"
+    )
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("skip_event_"))
+async def skip_event(callback: types.CallbackQuery):
+    """Пропускає подію і йде до бою"""
+    location_id = callback.data.replace("skip_event_", "")
+    
+    # Очищуємо збережену подію
+    if hasattr(explore_location, 'active_events') and callback.from_user.id in explore_location.active_events:
+        del explore_location.active_events[callback.from_user.id]
+    
+    # Отримуємо дані для бою
+    location = LOCATIONS[location_id]
+    db = Database()
+    player_data = await db.get_player(callback.from_user.id)
+    player = Player.from_dict(player_data)
+    
+    await start_monster_encounter(callback, location_id, location, player)
+
+
 @router.callback_query(F.data == "battle_attack")
 async def battle_attack(callback: types.CallbackQuery):
-    """Атака гравця з Attack Roll"""
+    """Атака гравця з Attack Roll та анімацією кубика"""
     user_id = callback.from_user.id
     
     if user_id not in active_battles:
@@ -275,25 +505,52 @@ async def battle_attack(callback: types.CallbackQuery):
     player = battle_state.player
     monster = battle_state.monster
     
-    #dice_msg = await callback.message.answer_dice(emoji="🎲")
+    # ============ АНІМАЦІЯ КУБИКА ============
     import asyncio
-    await asyncio.sleep(0)
     
+    # Отримуємо поточний текст бою
+    current_text = callback.message.text or ""
+    
+    # Анімація: кидаємо кубик
+    await callback.message.edit_text(
+        f"{current_text}\n\n🎲 Кидаємо кубик...",
+        parse_mode="Markdown"
+    )
+    await asyncio.sleep(0.4)
+    
+    # Анімація: кубик крутиться
+    await callback.message.edit_text(
+        f"{current_text}\n\n🎲 Кубик крутиться...",
+        parse_mode="Markdown"
+    )
+    await asyncio.sleep(0.4)
+    
+    # Розраховуємо результат
     attack_bonus = player.get_attack_bonus()
     d20_result, total_roll, is_critical = CombatCalculator.attack_roll(attack_bonus)
     
-    monster_ac = monster.defense + 10
+    # Анімація: показуємо результат
+    await callback.message.edit_text(
+        f"{current_text}\n\n🎲 Випало: **{d20_result}**!",
+        parse_mode="Markdown"
+    )
+    await asyncio.sleep(0.5)
+    # =========================================
     
+    monster_ac = monster.defense + 10
     battle_log = []
     
+    # Критичний промах
     if d20_result == 1:
         battle_log.append(f"💀 Критичний промах! (випало 1)")
         battle_log.append(f"Ви не наносите урону")
+    
+    # Попадання
     elif total_roll >= monster_ac or is_critical:
         weapon = player.equipment.get("weapon")
         
         if not weapon:
-            damage, damage_desc = 1 + (player.strength - 10) // 2, "кулак"
+            damage = 1 + (player.strength - 10) // 2
             battle_log.append(f"🥊 Удар кулаком: {damage} урону")
         else:
             weapon_type = weapon.get("weapon_type", "melee")
@@ -314,32 +571,66 @@ async def battle_attack(callback: types.CallbackQuery):
         
         monster.health -= damage
         player.total_damage_dealt += damage
+    
+    # Промах
     else:
         battle_log.append(f"❌ Промах! d20: {d20_result} + {attack_bonus} = {total_roll} (потрібно {monster_ac}+)")
     
+    # Перевірка смерті монстра
     if monster.health <= 0:
         await handle_victory(callback, battle_state, battle_log)
         return
     
+    # Хід монстра
     await monster_turn(callback, battle_state, battle_log)
 
 
 async def monster_turn(callback: types.CallbackQuery, battle_state: BattleState, battle_log: list):
-    """Хід монстра"""
+    """Хід монстра з анімацією"""
+    import asyncio
+    
     player = battle_state.player
     monster = battle_state.monster
     
+    # Показуємо результат ходу гравця перед ходом монстра
+    temp_text = "\n".join(battle_log)
+    temp_text += f"\n\n👤 HP: {player.health}/{player.max_health}"
+    temp_text += f"\n👹 {monster.name} HP: {monster.health}/{monster.max_health}"
+    
+    await callback.message.edit_text(
+        temp_text,
+        parse_mode="Markdown"
+    )
+    await asyncio.sleep(0.8)
+    
+    # ============ ХІД МОНСТРА ============
     if battle_state.divine_shield_active:
         battle_log.append(f"\n✨ Божественний щит блокує атаку!")
         battle_state.divine_shield_active = False
     else:
+        # Анімація кубика монстра
+        await callback.message.edit_text(
+            f"{temp_text}\n\n👹 {monster.name} атакує...\n🎲 Кубик крутиться...",
+            parse_mode="Markdown"
+        )
+        await asyncio.sleep(0.5)
+        
         monster_attack_bonus = (monster.attack - 10) // 2
         d20_result, total_roll, is_critical = CombatCalculator.attack_roll(monster_attack_bonus)
-        
         player_ac = player.get_armor_class()
         
+        # Показуємо результат кубика монстра
+        await callback.message.edit_text(
+            f"{temp_text}\n\n👹 {monster.name} атакує...\n🎲 Випало: **{d20_result}**!",
+            parse_mode="Markdown"
+        )
+        await asyncio.sleep(0.5)
+        
+        # Критичний промах
         if d20_result == 1:
             battle_log.append(f"\n💀 {monster.name} критично промахнувся!")
+        
+        # Попадання
         elif total_roll >= player_ac or is_critical:
             damage = max(1, monster.attack - player.get_defense() // 2)
             
@@ -353,15 +644,20 @@ async def monster_turn(callback: types.CallbackQuery, battle_state: BattleState,
             
             player.health -= damage
             player.total_damage_taken += damage
+        
+        # Промах
         else:
             battle_log.append(f"\n👹 {monster.name} промахнувся! ({total_roll} проти AC {player_ac})")
     
+    # Перевірка смерті гравця
     if player.health <= 0:
         await handle_defeat(callback, battle_state, battle_log)
         return
     
+    # Наступний раунд
     battle_state.round += 1
     
+    # Фінальний текст бою
     battle_text = "\n".join(battle_log)
     battle_text += f"\n\n👤 Ваше HP: {player.health}/{player.max_health}"
     battle_text += f"\n💙 Мана: {player.mana}/{player.max_mana}"
@@ -472,6 +768,9 @@ async def handle_victory(callback: types.CallbackQuery, battle_state: BattleStat
     
     player.reset_battle_cooldowns()
     
+    # ✨ НОВЕ: Оновлюємо квести
+    completed_quests = update_player_quests(player, "kill", monster.monster_type)
+    
     db = Database()
     await db.save_player(player.to_dict())
     
@@ -485,7 +784,25 @@ async def handle_victory(callback: types.CallbackQuery, battle_state: BattleStat
     
     if level_up_result["leveled_up"]:
         victory_text += f"\n🎊 **НОВИЙ РІВЕНЬ {level_up_result['new_level']}!**\n"
-        victory_text += f"⭐ +3 вільних очка характеристик"
+        victory_text += f"⭐ +3 вільних очка характеристик\n"
+    
+    # ✨ НОВЕ: Показуємо прогрес квестів
+    if completed_quests:
+        victory_text += f"\n📋 **Квести:**\n"
+        for quest in completed_quests:
+            victory_text += f"✅ {quest.name} - ВИКОНАНО!\n"
+    else:
+        # Показуємо прогрес активних квестів
+        active_kill_quests = [
+            q for q_id, q in player.quests.items()
+            if q.get("status") == "active" and q.get("type") == "kill"
+        ]
+        if active_kill_quests:
+            victory_text += f"\n📋 **Прогрес квестів:**\n"
+            for quest_data in active_kill_quests[:2]:  # Показуємо перші 2
+                progress = quest_data.get("progress", 0)
+                target = quest_data.get("target", 1)
+                victory_text += f"🔸 {quest_data['name']}: {progress}/{target}\n"
     
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
         [types.InlineKeyboardButton(text="🌲 Продовжити пригоди", callback_data="continue_adventure")]
@@ -493,6 +810,7 @@ async def handle_victory(callback: types.CallbackQuery, battle_state: BattleStat
     
     await callback.message.edit_text(victory_text, reply_markup=keyboard, parse_mode="Markdown")
     await callback.answer()
+
 
 
 async def handle_defeat(callback: types.CallbackQuery, battle_state: BattleState, battle_log: list):

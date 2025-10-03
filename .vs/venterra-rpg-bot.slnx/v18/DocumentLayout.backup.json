@@ -7,92 +7,64 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\battle.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\tavern.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\tavern.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\guild.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\guild.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\config\\quests.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\config\\quests.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\models\\quest.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\models\\quest.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\config\\constants.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\config\\constants.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\ui\\keyboards.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\ui\\keyboards.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\city.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\city.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\models\\player.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\models\\player.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\utils\\dice.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\dice.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\inventory.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\inventory.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\city.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\city.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\config\\equipment.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\config\\equipment.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\migrations\\add_offline_regen.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:migrations\\add_offline_regen.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\shop.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\shop.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\migrations\\add_mana_system.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:migrations\\add_mana_system.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\utils\\skill_checks.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\skill_checks.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\models\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\models\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\config\\settings.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\config\\settings.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\database.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\database.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\start.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\start.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\handlers\\states.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\handlers\\states.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\ui\\keyboards.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\ui\\keyboards.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\.env.example||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.env.example||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\config\\equipment.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\config\\equipment.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\models\\monster.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\models\\monster.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\tests||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\database.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\database.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Develop\\venterra-rpg-bot\\src\\ui\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\ui\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -102,23 +74,131 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "equipment.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\config\\equipment.py",
-              "RelativeDocumentMoniker": "src\\config\\equipment.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\config\\equipment.py",
-              "RelativeToolTip": "src\\config\\equipment.py",
-              "ViewState": "AgIAADkCAAAAAAAAAAAUwEYCAAAEAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "main.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\main.py",
+              "RelativeDocumentMoniker": "main.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\main.py",
+              "RelativeToolTip": "main.py",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEYAAAArAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-03T09:38:46.234Z",
+              "WhenOpened": "2025-10-04T09:56:25.901Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "guild.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\guild.py",
+              "RelativeDocumentMoniker": "src\\handlers\\guild.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\guild.py",
+              "RelativeToolTip": "src\\handlers\\guild.py",
+              "ViewState": "AgIAAFABAAAAAAAAAAAIwGkBAAAqAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T09:55:59.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "quests.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\config\\quests.py",
+              "RelativeDocumentMoniker": "src\\config\\quests.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\config\\quests.py",
+              "RelativeToolTip": "src\\config\\quests.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAmAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T09:51:32.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "quest.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\models\\quest.py",
+              "RelativeDocumentMoniker": "src\\models\\quest.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\models\\quest.py",
+              "RelativeToolTip": "src\\models\\quest.py",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAIwF0AAAAUAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T09:50:55.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "shop.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\shop.py",
+              "RelativeDocumentMoniker": "src\\handlers\\shop.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\shop.py",
+              "RelativeToolTip": "src\\handlers\\shop.py",
+              "ViewState": "AgIAAK4BAAAAAAAAAAAAAEgBAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T09:02:16.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "skill_checks.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\utils\\skill_checks.py",
+              "RelativeDocumentMoniker": "src\\utils\\skill_checks.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\utils\\skill_checks.py",
+              "RelativeToolTip": "src\\utils\\skill_checks.py",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAAALoAAAAgAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T08:45:32.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "start.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\start.py",
+              "RelativeDocumentMoniker": "src\\handlers\\start.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\start.py",
+              "RelativeToolTip": "src\\handlers\\start.py",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEcAAABZAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T08:15:45.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "database.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\database.py",
+              "RelativeDocumentMoniker": "src\\database.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\database.py",
+              "RelativeToolTip": "src\\database.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOQAAAAYAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T08:11:41.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "player.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\models\\player.py",
+              "RelativeDocumentMoniker": "src\\models\\player.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\models\\player.py",
+              "RelativeToolTip": "src\\models\\player.py",
+              "ViewState": "AgIAAK8CAAAAAAAAAAAQwL0CAAAvAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T08:09:18.041Z",
               "EditorCaption": ""
             },
             {
@@ -129,262 +209,88 @@
               "RelativeDocumentMoniker": "src\\handlers\\battle.py",
               "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\battle.py",
               "RelativeToolTip": "src\\handlers\\battle.py",
-              "ViewState": "AgIAANcCAAAAAAAAAAAlwBUBAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAG0BAAAAAAAAAAAIwIYBAAAbAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:42:43.628Z",
+              "WhenOpened": "2025-10-03T19:54:15.072Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "player.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\models\\player.py",
-              "RelativeDocumentMoniker": "src\\models\\player.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\models\\player.py",
-              "RelativeToolTip": "src\\models\\player.py",
-              "ViewState": "AgIAAF4CAAAAAAAAAAAAAHECAAAVAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "add_offline_regen.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\migrations\\add_offline_regen.py",
+              "RelativeDocumentMoniker": "migrations\\add_offline_regen.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\migrations\\add_offline_regen.py",
+              "RelativeToolTip": "migrations\\add_offline_regen.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAbAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T15:53:15.685Z"
+              "WhenOpened": "2025-10-04T08:07:39.44Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "inventory.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\inventory.py",
-              "RelativeDocumentMoniker": "src\\handlers\\inventory.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\inventory.py",
-              "RelativeToolTip": "src\\handlers\\inventory.py",
-              "ViewState": "AgIAAAkCAAAAAAAAAAAQwCACAAAbAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:38:12.527Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "dice.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\utils\\dice.py",
-              "RelativeDocumentMoniker": "src\\utils\\dice.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\utils\\dice.py",
-              "RelativeToolTip": "src\\utils\\dice.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAALYAAABGAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:41:42.685Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "city.py",
               "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\city.py",
               "RelativeDocumentMoniker": "src\\handlers\\city.py",
               "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\city.py",
               "RelativeToolTip": "src\\handlers\\city.py",
-              "ViewState": "AgIAALIBAAAAAAAAAAAQwMkBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAF0AAABBAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T21:43:11.728Z"
+              "WhenOpened": "2025-10-04T08:04:47.959Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "keyboards.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\ui\\keyboards.py",
-              "RelativeDocumentMoniker": "src\\ui\\keyboards.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\ui\\keyboards.py",
-              "RelativeToolTip": "src\\ui\\keyboards.py",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAAAAAAAAADAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:00:17.384Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "constants.py",
               "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\config\\constants.py",
               "RelativeDocumentMoniker": "src\\config\\constants.py",
               "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\config\\constants.py",
               "RelativeToolTip": "src\\config\\constants.py",
-              "ViewState": "AgIAAAUBAAAAAAAAAAAkwBIBAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAAAO4AAAABAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T15:45:12.987Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "tavern.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\tavern.py",
-              "RelativeDocumentMoniker": "src\\handlers\\tavern.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\tavern.py",
-              "RelativeToolTip": "src\\handlers\\tavern.py",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAADEBAAAoAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T17:07:49.044Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "shop.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\shop.py",
-              "RelativeDocumentMoniker": "src\\handlers\\shop.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\shop.py",
-              "RelativeToolTip": "src\\handlers\\shop.py",
-              "ViewState": "AgIAAPYBAAAAAAAAAAAIwA8CAAAiAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:50:12.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "__init__.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\__init__.py",
-              "RelativeDocumentMoniker": "src\\handlers\\__init__.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\__init__.py",
-              "RelativeToolTip": "src\\handlers\\__init__.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABEAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:43:11.781Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "__init__.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\models\\__init__.py",
-              "RelativeDocumentMoniker": "src\\models\\__init__.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\models\\__init__.py",
-              "RelativeToolTip": "src\\models\\__init__.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-03T09:42:28.059Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "add_mana_system.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\migrations\\add_mana_system.py",
-              "RelativeDocumentMoniker": "migrations\\add_mana_system.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\migrations\\add_mana_system.py",
-              "RelativeToolTip": "migrations\\add_mana_system.py",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAQwGcAAAAWAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-03T12:30:22.412Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "states.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\states.py",
-              "RelativeDocumentMoniker": "src\\handlers\\states.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\states.py",
-              "RelativeToolTip": "src\\handlers\\states.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T17:31:33.011Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "start.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\start.py",
-              "RelativeDocumentMoniker": "src\\handlers\\start.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\handlers\\start.py",
-              "RelativeToolTip": "src\\handlers\\start.py",
-              "ViewState": "AgIAAKkAAAAAAAAAAAAIwMIAAAA6AAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T17:31:44.809Z"
+              "WhenOpened": "2025-10-04T08:00:41.025Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
-              "Title": "settings.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\config\\settings.py",
-              "RelativeDocumentMoniker": "src\\config\\settings.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\config\\settings.py",
-              "RelativeToolTip": "src\\config\\settings.py",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAEsAAAAXAAAAAAAAAA==",
+              "Title": "equipment.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\config\\equipment.py",
+              "RelativeDocumentMoniker": "src\\config\\equipment.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\config\\equipment.py",
+              "RelativeToolTip": "src\\config\\equipment.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T15:44:56.387Z"
+              "WhenOpened": "2025-10-04T08:00:42.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "__init__.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\ui\\__init__.py",
+              "RelativeDocumentMoniker": "src\\ui\\__init__.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\ui\\__init__.py",
+              "RelativeToolTip": "src\\ui\\__init__.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
+              "WhenOpened": "2025-10-04T08:00:34.173Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "main.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\main.py",
-              "RelativeDocumentMoniker": "main.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\main.py",
-              "RelativeToolTip": "main.py",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAAFwAAABEAAAAAAAAAA==",
+              "Title": "keyboards.py",
+              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\ui\\keyboards.py",
+              "RelativeDocumentMoniker": "src\\ui\\keyboards.py",
+              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\ui\\keyboards.py",
+              "RelativeToolTip": "src\\ui\\keyboards.py",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAAAI8AAAAAAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:40:44.343Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": ".env.example",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\.env.example",
-              "RelativeDocumentMoniker": ".env.example",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\.env.example",
-              "RelativeToolTip": ".env.example",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-02T17:32:35.796Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "requirements.txt",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\requirements.txt",
-              "RelativeDocumentMoniker": "requirements.txt",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\requirements.txt",
-              "RelativeToolTip": "requirements.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-10-02T17:16:30.051Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "monster.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\models\\monster.py",
-              "RelativeDocumentMoniker": "src\\models\\monster.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\models\\monster.py",
-              "RelativeToolTip": "src\\models\\monster.py",
-              "ViewState": "AgIAADwAAAAAAAAAAAAIwFUAAAAJAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:42:12.82Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AgIAACMAAAAAAAAAAAAUwD4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-02T16:45:02.402Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "database.py",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\src\\database.py",
-              "RelativeDocumentMoniker": "src\\database.py",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\src\\database.py",
-              "RelativeToolTip": "src\\database.py",
-              "ViewState": "AgIAALcAAAAAAAAAAAAIwNAAAAAhAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMtSURBVDhPrZS9T1tnFMZ/1/cLGxy7BNuJIeCG2hIiSSWqRmmR8Fh16lhVVVTRIR34Ezo2kSqUqUJeKkHLEqlDWZAyUJZEoUNaoTatXEgsQykGFFyw8de997337RA5MeYqUx/pDOc55zx6znmlF/5PSCmVzjybzX4/NTV1U9f1TvoUKpWKrFard5aXl\u002B/u7e1Vu\u002BtaNzE9PU0ikeimX2J1dVUWi8UvVFWVKysr3xQKhXJn/YwgQKFQ6KZQVZVUKoWu64FsNhtNp9O3LMsKapo2u7Gxcdju8xVMJpPdFIry6jqGYeiTk5MDuq5/IqW0hBBfFwqFOkCgc6gNwzDORPuuqqqytLTE3Nycura2diEUCk2Yphlvz/o63Nzc7KbQNI10Os27N95n4vp7aAGFZv3Emp\u002Bf//tUX2fSxtjYWDdFzRL8lD9kv9qk2bTRA3AxrGoXh4b7A4FXi/oK\u002Bjm0\u002BpI8269xUKnz\u002BOk\u002BwrGJ9Rn6R\u002BNDI/F4vK/d53vDVCp1JioNwaONPfI7ZTzh4AmXaq2hNEQgGA6HQ\u002B1ZX0EA13VxUfjrucO9xwf8tl3m2qUoE6l\u002BzvfqCOEghCAWrV9d\u002Bu7mz17zjyee5w37rry1tQXAbkvnxycn7JZPEMLGdRyE4\u002BA6Np7r4CkKhvIcmuvQWh8n9uWsr8NMJkMmk6Ehezg4riGEg\u002BcINDwiQY1ISCca0nk7FeJasgpuE6x/wN75wNdhPp8HYGe3iWXZeEIw3K8xk20SVI\u002BR0gPpETWOGAwegGi8EHWPI691ODKYwAiAEA63sgbvXPiV8dgzrsQLXBnIM9RbRBH/gqiBWwc9eeQraNs2tm0z8obJ5YEgYVMlds5DkS54NggLPA9cQAZA6tBz1cUY/NZ35VKpBIAJfJ69TMWCRGQLWja4LVAioARBV8DMHGG\u002B\u002BSc9bz1dXFyc9RUcHR09lSuKgumVJLW6gtsC9xB6b4BUQD2/88P93a8ePLj3KJfLNc4ILiwsvPwIOvHZpx9uXzIHU9i/v3iAk1\u002BQfdelG5woP3x4u5jL5RrdM6\u002BFlPKc9Jy7srW9J2vrnrRK21LK\u002B1LKj2dmZlLtvv8AoKdgTW7XN1wAAAAASUVORK5CYII=",
-              "WhenOpened": "2025-10-02T16:33:24.484Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "tests",
-              "DocumentMoniker": "C:\\Develop\\venterra-rpg-bot\\tests",
-              "RelativeDocumentMoniker": "tests",
-              "ToolTip": "C:\\Develop\\venterra-rpg-bot\\tests",
-              "RelativeToolTip": "tests",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-02T16:05:01.869Z"
+              "WhenOpened": "2025-10-04T08:00:23.42Z",
+              "EditorCaption": ""
             }
           ]
         }

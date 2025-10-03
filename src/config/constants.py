@@ -156,9 +156,9 @@ class MonsterType:
 MONSTER_BASE_STATS: Dict[str, Dict[str, Any]] = {
     MonsterType.WOLF: {
         "name": "🐺 Вовк",
-        "health": 30,
-        "attack": 8,
-        "defense": 3,
+        "health": 25,      # Було: 30 → Зменшено на 17%
+        "attack": 6,       # Було: 8 → Зменшено на 25%
+        "defense": 2,      # Було: 3 → Зменшено на 33%
         "exp_reward": 50,
         "gold_reward": 10,
         "loot": ["🐺 Вовчий ікло", "🐺 Вовча шкура"],
@@ -166,9 +166,9 @@ MONSTER_BASE_STATS: Dict[str, Dict[str, Any]] = {
     },
     MonsterType.SPIDER: {
         "name": "🕷️ Гігантський павук",
-        "health": 20,
-        "attack": 7,
-        "defense": 1,
+        "health": 16,      # Було: 20 → Зменшено на 20%
+        "attack": 5,       # Було: 7 → Зменшено на 29%
+        "defense": 1,      # Без змін (вже 1)
         "exp_reward": 40,
         "gold_reward": 8,
         "loot": ["🕸️ Павутиння", "☠️ Отрута павука"],
@@ -176,14 +176,16 @@ MONSTER_BASE_STATS: Dict[str, Dict[str, Any]] = {
     },
     MonsterType.GOBLIN: {
         "name": "👹 Гоблін",
-        "health": 25,
-        "attack": 6,
-        "defense": 2,
+        "health": 20,      # Було: 25 → Зменшено на 20%
+        "attack": 5,       # Було: 6 → Зменшено на 17%
+        "defense": 2,      # Без змін
         "exp_reward": 60,
         "gold_reward": 15,
         "loot": ["👹 Вухо гобліна", "🪙 Мішок золота"],
         "loot_chance": 0.8,
     },
+    
+    # Монстри 3+ рівня БЕЗ ЗМІН:
     MonsterType.SKELETON: {
         "name": "💀 Скелет-воїн",
         "health": 35,
@@ -213,6 +215,26 @@ MONSTER_BASE_STATS: Dict[str, Dict[str, Any]] = {
         "gold_reward": 30,
         "loot": ["⚔️ Важкий меч", "🛡️ Щит орка"],
         "loot_chance": 0.6,
+    },
+    MonsterType.WIZARD: {
+        "name": "🧙 Темний маг",
+        "health": 30,
+        "attack": 14,
+        "defense": 3,
+        "exp_reward": 150,
+        "gold_reward": 40,
+        "loot": ["📜 Сувій", "🔮 Магічний кристал"],
+        "loot_chance": 0.8,
+    },
+    MonsterType.DRAGON: {
+        "name": "🐉 Молодий дракон",
+        "health": 100,
+        "attack": 18,
+        "defense": 10,
+        "exp_reward": 300,
+        "gold_reward": 100,
+        "loot": ["💎 Драконяча луска", "🔥 Драконяче серце"],
+        "loot_chance": 0.9,
     },
 }
 
@@ -313,6 +335,3 @@ SHOP_ITEMS: Dict[str, Dict[str, Any]] = {
 # Множники для храму
 TEMPLE_COST_PER_LEVEL = 1.1  # Ціна зростає на 10% за рівень
 
-# Регенерація здоров'я
-HEALTH_REGEN_BASE = 1  # Базова регенерація
-HEALTH_REGEN_PER_STAMINA = 0.2  # За кожну одиницю витривалості

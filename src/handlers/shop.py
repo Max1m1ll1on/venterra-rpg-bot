@@ -326,117 +326,8 @@ async def shop_back(callback: types.CallbackQuery):
     await callback.answer()
 
 
-@router.callback_query(F.data == "shop_potions")
-async def show_potions(callback: types.CallbackQuery):
-    """Показує зілля в магазині"""
-    db = Database()
-    player_data = await db.get_player(callback.from_user.id)
-    player = Player.from_dict(player_data)
-    
-    potions = {
-        "health_potion": {
-            "name": "❤️ Зілля здоров'я",
-            "type": "potion",
-            "price": 25,
-            "effect_type": "heal",
-            "effect_value": 50,
-            "description": "Відновлює 50 HP"
-        },
-        "greater_health_potion": {
-            "name": "❤️ Велике зілля здоров'я",
-            "type": "potion",
-            "price": 50,
-            "effect_type": "heal",
-            "effect_value": 100,
-            "description": "Відновлює 100 HP"
-        },
-        "full_heal_potion": {
-            "name": "✨ Зілля повного відновлення",
-            "type": "potion",
-            "price": 100,
-            "effect_type": "full_heal",
-            "description": "Повністю відновлює HP"
-        }
-    }
-    
-    text = f"🧪 **Зілля**\n💰 Золото: {player.gold}\n\n"
-    keyboard_buttons = []
-    
-    for potion_id, potion_data in potions.items():
-        name = potion_data.get("name", "Зілля")
-        price = potion_data.get("price", 25)
-        
-        keyboard_buttons.append([
-            types.InlineKeyboardButton(
-                text=f"{name} - {price}💰",
-                callback_data=f"shop_buy_potion_{potion_id}"
-            )
-        ])
-    
-    keyboard_buttons.append([
-        types.InlineKeyboardButton(text="🔙 Назад", callback_data="shop_back")
-    ])
-    
-    keyboard = types.InlineKeyboardMarkup(inline_keyboard=keyboard_buttons)
-    
-    await callback.message.edit_text(text, reply_markup=keyboard, parse_mode="Markdown")
-    await callback.answer()
 
 
-@router.callback_query(F.data.startswith("shop_buy_potion_"))
-async def buy_potion(callback: types.CallbackQuery):
-    """Купує зілля"""
-    potion_id = callback.data.replace("shop_buy_potion_", "")
-    
-    potions = {
-        "health_potion": {
-            "name": "❤️ Зілля здоров'я",
-            "type": "potion",
-            "price": 25,
-            "effect_type": "heal",
-            "effect_value": 50,
-            "description": "Відновлює 50 HP"
-        },
-        "greater_health_potion": {
-            "name": "❤️ Велике зілля здоров'я",
-            "type": "potion",
-            "price": 50,
-            "effect_type": "heal",
-            "effect_value": 100,
-            "description": "Відновлює 100 HP"
-        },
-        "full_heal_potion": {
-            "name": "✨ Зілля повного відновлення",
-            "type": "potion",
-            "price": 100,
-            "effect_type": "full_heal",
-            "description": "Повністю відновлює HP"
-        }
-    }
-    
-    if potion_id not in potions:
-        await callback.answer("❌ Зілля не знайдено!")
-        return
-    
-    db = Database()
-    player_data = await db.get_player(callback.from_user.id)
-    player = Player.from_dict(player_data)
-    
-    potion_data = potions[potion_id].copy()
-    price = potion_data.get("price", 25)
-    
-    if player.gold < price:
-        await callback.answer("❌ Недостатньо золота!", show_alert=True)
-        return
-    
-    # Купуємо
-    player.gold -= price
-    player.inventory.append(potion_data)
-    
-    await db.save_player(player.to_dict())
-    
-    await callback.answer(f"✅ Куплено {potion_data['name']}!", show_alert=True)
-    
 @router.callback_query(F.data == "shop_sell")
 async def show_sell_menu(callback: types.CallbackQuery):
     """Показує меню продажу"""
@@ -447,7 +338,13 @@ async def show_sell_menu(callback: types.CallbackQuery):
     # Збираємо предмети для продажу (не зілля)
     sellable_items = []
     for i, item in enumerate(player.inventory):
-        if isinstance(item, dict) and item.get("type") != "potion":
+        # ✨ ВИПРАВЛЕНО: Приймаємо і dict і string (лут з монстрів)
+        if isinstance(item, dict):
+            # Словник - перевіряємо що не зілля
+            if item.get("type") != "potion":
+                sellable_items.append((i, item))
+        elif isinstance(item, str):
+            # Строка - це лут з монстрів, можна продати
             sellable_items.append((i, item))
     
     if not sellable_items:
@@ -458,19 +355,28 @@ async def show_sell_menu(callback: types.CallbackQuery):
     keyboard_buttons = []
     
     for index, item in sellable_items[:10]:  # Показуємо перші 10
-        name = item.get("name", "Предмет")
-        # Ціна продажу = 50% від покупки
-        base_price = item.get("base_price", 10)
-        from src.config.equipment import RARITY_PRICE_MULTIPLIER, RARITY_EMOJI
-        rarity = item.get("rarity", "common")
-        multiplier = RARITY_PRICE_MULTIPLIER.get(rarity, 1.0)
-        sell_price = int(base_price * multiplier * 0.5)
+        if isinstance(item, dict):
+            # Спорядження або інші предмети-словники
+            name = item.get("name", "Предмет")
+            base_price = item.get("base_price", 10)
+            
+            from src.config.equipment import RARITY_PRICE_MULTIPLIER, RARITY_EMOJI
+            rarity = item.get("rarity", "common")
+            multiplier = RARITY_PRICE_MULTIPLIER.get(rarity, 1.0)
+            sell_price = int(base_price * multiplier * 0.5)
+            
+            rarity_emoji = RARITY_EMOJI.get(rarity, "⚪")
+            button_text = f"{rarity_emoji} {name} - {sell_price}💰"
         
-        rarity_emoji = RARITY_EMOJI.get(rarity, "⚪")
+        elif isinstance(item, str):
+            # Лут з монстрів (строка)
+            name = item
+            sell_price = 5  # Базова ціна для луту
+            button_text = f"📦 {name} - {sell_price}💰"
         
         keyboard_buttons.append([
             types.InlineKeyboardButton(
-                text=f"{rarity_emoji} {name} - {sell_price}💰",
+                text=button_text,
                 callback_data=f"shop_sell_item_{index}"
             )
         ])
@@ -504,20 +410,32 @@ async def sell_item(callback: types.CallbackQuery):
     
     item = player.inventory[item_index]
     
-    if not isinstance(item, dict) or item.get("type") == "potion":
-        await callback.answer("❌ Цей предмет не можна продати!")
-        return
+    # ✨ ВИПРАВЛЕНО: Обробка і dict і string
+    if isinstance(item, dict):
+        # Перевіряємо що не зілля
+        if item.get("type") == "potion":
+            await callback.answer("❌ Цей предмет не можна продати!")
+            return
+        
+        # Розраховуємо ціну для спорядження
+        base_price = item.get("base_price", 10)
+        from src.config.equipment import RARITY_PRICE_MULTIPLIER
+        rarity = item.get("rarity", "common")
+        multiplier = RARITY_PRICE_MULTIPLIER.get(rarity, 1.0)
+        sell_price = int(base_price * multiplier * 0.5)
+        item_name = item.get("name", "Предмет")
     
-    # Розраховуємо ціну продажу
-    base_price = item.get("base_price", 10)
-    from src.config.equipment import RARITY_PRICE_MULTIPLIER
-    rarity = item.get("rarity", "common")
-    multiplier = RARITY_PRICE_MULTIPLIER.get(rarity, 1.0)
-    sell_price = int(base_price * multiplier * 0.5)
+    elif isinstance(item, str):
+        # Лут з монстрів (строка)
+        item_name = item
+        sell_price = 5  # Базова ціна для луту
+    
+    else:
+        await callback.answer("❌ Невідомий тип предмета!")
+        return
     
     # Продаємо
     player.gold += sell_price
-    item_name = item.get("name", "Предмет")
     player.inventory.pop(item_index)
     
     await db.save_player(player.to_dict())

@@ -122,6 +122,8 @@ class Database:
                             free_points = ?,
                             health = ?,
                             max_health = ?,
+                            mana = ?,
+                            max_mana = ?,
                             equipment = ?,
                             inventory = ?,
                             current_location = ?,
@@ -134,6 +136,8 @@ class Database:
                             total_damage_dealt = ?,
                             total_damage_taken = ?,
                             active_effects = ?,
+                            ability_cooldowns = ?,
+                            last_login = ?,
                             updated_at = CURRENT_TIMESTAMP
                         WHERE user_id = ?
                     ''', (
@@ -151,6 +155,8 @@ class Database:
                         player_data.get('free_points', 5),
                         player_data.get('health', 0),
                         player_data.get('max_health', 0),
+                        player_data.get('mana', 0),
+                        player_data.get('max_mana', 0),
                         player_data.get('equipment', '{}'),
                         player_data.get('inventory', '[]'),
                         player_data.get('current_location', 'city'),
@@ -163,6 +169,8 @@ class Database:
                         player_data.get('total_damage_dealt', 0),
                         player_data.get('total_damage_taken', 0),
                         player_data.get('active_effects', '[]'),
+                        player_data.get('ability_cooldowns', '{}'),
+                        player_data.get('last_login'),
                         player_data['user_id']
                     ))
                 else:
@@ -172,11 +180,15 @@ class Database:
                             user_id, username, character_name, class,
                             level, experience, gold,
                             strength, agility, intelligence, stamina, charisma, free_points,
-                            health, max_health,
-                            equipment, inventory, current_location
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            health, max_health, mana, max_mana,
+                            equipment, inventory, current_location,
+                            quests, achievements, last_daily_reward,
+                            monsters_killed, quests_completed, total_gold_earned,
+                            total_damage_dealt, total_damage_taken,
+                            active_effects, ability_cooldowns, last_login
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ''', (
-                        player_data['user_id'],
+                        player_data.get('user_id'),
                         player_data.get('username', ''),
                         player_data.get('character_name', 'Безіменний'),
                         player_data.get('class', 'warrior'),
@@ -191,19 +203,27 @@ class Database:
                         player_data.get('free_points', 5),
                         player_data.get('health', 0),
                         player_data.get('max_health', 0),
+                        player_data.get('mana', 0),
+                        player_data.get('max_mana', 0),
                         player_data.get('equipment', '{}'),
                         player_data.get('inventory', '[]'),
-                        player_data.get('current_location', 'city')
+                        player_data.get('current_location', 'city'),
+                        player_data.get('quests', '{}'),
+                        player_data.get('achievements', '[]'),
+                        player_data.get('last_daily_reward'),
+                        player_data.get('monsters_killed', 0),
+                        player_data.get('quests_completed', 0),
+                        player_data.get('total_gold_earned', 100),
+                        player_data.get('total_damage_dealt', 0),
+                        player_data.get('total_damage_taken', 0),
+                        player_data.get('active_effects', '[]'),
+                        player_data.get('ability_cooldowns', '{}'),
+                        player_data.get('last_login')
                     ))
                 
                 await db.commit()
                 return True
                 
         except Exception as e:
-            logger.error(f"Помилка збереження гравця {player_data.get('user_id')}: {e}")
+            logger.error(f"Помилка збереження гравця: {e}")
             return False
-    
-    async def player_exists(self, user_id: int) -> bool:
-        """Перевіряє чи існує гравець"""
-        player = await self.get_player(user_id)
-        return player is not None

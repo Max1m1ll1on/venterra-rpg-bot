@@ -29,8 +29,8 @@ def get_adventure_main_keyboard() -> types.ReplyKeyboardMarkup:
                 types.KeyboardButton(text="🎒 Інвентар")
             ],
             [
-                types.KeyboardButton(text="🗺️ Досліджувати"),
-                types.KeyboardButton(text="🏰 Повернутися до міста")
+                types.KeyboardButton(text="🏰 Повернутися до міста"),
+                types.KeyboardButton(text="🗺️ Досліджувати") 
             ]
         ],
         resize_keyboard=True
