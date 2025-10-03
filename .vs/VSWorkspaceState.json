@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\migrations",
+    "\\src",
+    "\\src\\config",
+    "\\src\\handlers",
+    "\\src\\models",
+    "\\src\\services",
+    "\\src\\ui",
+    "\\src\\utils"
+  ],
+  "PreviewInSolutionExplorer": false
+}
