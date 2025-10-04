@@ -1,4 +1,4 @@
-﻿# src/models/player.py - Модель гравця (ПОВНА ВИПРАВЛЕНА ВЕРСІЯ)
+﻿# src/models/player.py - Модель гравця
 
 import json
 from typing import Dict, List, Optional
@@ -16,7 +16,7 @@ class Player:
         self.username = username
         self.character_name = character_name or "Безіменний"
         self.character_class = character_class
-        self.last_login = None  # Час останнього входу
+        self.last_login = None
         
         # Прогресія
         self.level = 1
@@ -26,7 +26,7 @@ class Player:
         # Ресурси
         self.gold = settings.STARTING_GOLD
         
-        # Характеристики (будуть встановлені нижче)
+        # Характеристики
         self.strength = 0
         self.agility = 0
         self.intelligence = 0
@@ -50,18 +50,10 @@ class Player:
         
         # Екіпірування
         self.equipment = {
-            'weapon': None,
-            'head': None,
-            'chest': None,
-            'legs': None,
-            'feet': None,
-            'hands': None,
-            'offhand': None,
-            'ring_1': None,
-            'ring_2': None,
-            'earring_1': None,
-            'earring_2': None,
-            'amulet': None
+            'weapon': None, 'head': None, 'chest': None, 'legs': None,
+            'feet': None, 'hands': None, 'offhand': None,
+            'ring_1': None, 'ring_2': None, 'earring_1': None,
+            'earring_2': None, 'amulet': None
         }
         
         # Інвентар
@@ -111,8 +103,8 @@ class Player:
                 "mighty_strike": {
                     "name": "💪 Могутній удар",
                     "description": "Наносить подвійний урон",
-                    "cooldown": "1 бій",
-                    "cost_type": "cooldown"
+                    "mana_cost": 6,
+                    "cost_type": "mana"
                 }
             },
             "mage": {
@@ -127,22 +119,26 @@ class Player:
                 "divine_shield": {
                     "name": "✨ Божественний щит",
                     "description": "Блокує наступну атаку ворога",
-                    "cooldown": "1 бій",
-                    "cost_type": "cooldown"
+                    "mana_cost": 5,
+                    "cost_type": "mana"
+                },
+                "smite_undead": {
+                    "name": "⚡ Знищення нежиті",
+                    "description": "1d20 урону по нежиті",
+                    "mana_cost": 5,
+                    "cost_type": "mana"
                 }
             },
             "rogue": {
-                "critical_strike": {
-                    "name": "🗡️ Критичний удар",
-                    "description": "Гарантований критичний удар (× 2.5 урону)",
-                    "cooldown": "1 бій",
-                    "cost_type": "cooldown"
+                "poison_strike": {
+                    "name": "🗡️☠️ Ядовитий удар",
+                    "description": "Атака з отрутою (1d4 урону 3 ходи)",
+                    "mana_cost": 4,
+                    "cost_type": "mana"
                 }
             }
         }
         return abilities.get(self.character_class, {})
-    
-    # ==================== ДОСВІД ТА РІВНІ ====================
     
     def get_required_experience(self) -> int:
         """Повертає необхідну кількість досвіду для наступного рівня"""
@@ -179,8 +175,6 @@ class Player:
         health_increase = self.max_health - old_max
         self.health += health_increase
     
-    # ==================== ХАРАКТЕРИСТИКИ ====================
-    
     def add_stat(self, stat_name: str) -> bool:
         """Додає 1 очко до характеристики"""
         if self.free_points <= 0:
@@ -216,8 +210,6 @@ class Player:
         
         return bonus
     
-    # ==================== МАНА ====================
-    
     def use_mana(self, amount: int) -> bool:
         """Витрачає ману"""
         if self.mana >= amount:
@@ -243,45 +235,37 @@ class Player:
         
         return self.restore_mana(regen_amount)
     
-    # ==================== НАВИЧКИ ====================
+    def can_use_ability(self, ability_name: str) -> bool:
+        """Перевіряє чи може використати здібність"""
+        abilities = {
+            "mage": {"fireball": 5},
+            "warrior": {"mighty_strike": 6},
+            "paladin": {"divine_shield": 5, "smite_undead": 5},
+            "rogue": {"poison_strike": 4}
+        }
+        
+        class_abilities = abilities.get(self.character_class, {})
+        mana_cost = class_abilities.get(ability_name, 999)
+        
+        return self.mana >= mana_cost
     
-    def can_use_ability(self, ability_key: str) -> bool:
-        """Перевіряє чи можна використати здібність"""
-        if ability_key not in self.class_abilities:
-            return False
+    def use_ability(self, ability_name: str):
+        """Використовує здібність (витрачає ману)"""
+        abilities = {
+            "mage": {"fireball": 5},
+            "warrior": {"mighty_strike": 6},
+            "paladin": {"divine_shield": 5, "smite_undead": 5},
+            "rogue": {"poison_strike": 4}
+        }
         
-        ability = self.class_abilities[ability_key]
+        class_abilities = abilities.get(self.character_class, {})
+        mana_cost = class_abilities.get(ability_name, 0)
         
-        if ability.get("cost_type") == "cooldown":
-            return ability_key not in self.ability_cooldowns
-        
-        if ability.get("cost_type") == "mana":
-            mana_cost = ability.get("mana_cost", 0)
-            return self.mana >= mana_cost
-        
-        return True
-    
-    def use_ability(self, ability_key: str) -> bool:
-        """Використовує здібність"""
-        if not self.can_use_ability(ability_key):
-            return False
-        
-        ability = self.class_abilities[ability_key]
-        
-        if ability.get("cost_type") == "mana":
-            mana_cost = ability.get("mana_cost", 0)
-            self.use_mana(mana_cost)
-        
-        if ability.get("cost_type") == "cooldown":
-            self.ability_cooldowns[ability_key] = True
-        
-        return True
+        self.mana = max(0, self.mana - mana_cost)
     
     def reset_battle_cooldowns(self):
-        """Скидає cooldown'и після бою"""
-        self.ability_cooldowns.clear()
-    
-    # ==================== БІЙ ====================
+        """Скидає кулдауни здібностей після бою"""
+        self.ability_cooldowns = {}
     
     def get_armor_class(self) -> int:
         """Розраховує Armor Class (AC) як у D&D"""
@@ -373,8 +357,6 @@ class Player:
         """Перевіряє чи живий персонаж"""
         return self.health > 0
     
-    # ==================== ЕКОНОМІКА ====================
-    
     def add_gold(self, amount: int):
         """Додає золото"""
         self.gold += amount
@@ -386,8 +368,6 @@ class Player:
             self.gold -= amount
             return True
         return False
-    
-    # ==================== ІНВЕНТАР ====================
     
     def equip_item(self, inventory_index: int) -> bool:
         """Екіпірує предмет з інвентаря"""
@@ -504,7 +484,74 @@ class Player:
         
         return "\n".join(lines)
     
-    # ==================== СЕРІАЛІЗАЦІЯ ====================
+    def get_double_attack_chance(self) -> int:
+        """Шанс подвійного удару воїна (залежить від сили)"""
+        if self.character_class != "warrior":
+            return 0
+        
+        base_chance = 25
+        strength_bonus = max(0, (self.strength - 10) * 2)
+        return min(75, base_chance + strength_bonus)
+    
+    def get_critical_chance(self) -> int:
+        """Шанс критичного удару розбійника (залежить від спритності)"""
+        if self.character_class != "rogue":
+            return 0
+        
+        base_chance = 25
+        agility_bonus = max(0, (self.agility - 10) * 2)
+        return min(75, base_chance + agility_bonus)
+
+    def apply_offline_regeneration(self):
+        """Застосовує регенерацію за час офлайну на основі stamina та intelligence"""
+        if not self.last_login:
+            from datetime import datetime
+            self.last_login = datetime.now().isoformat()
+            return {"hp": 0, "mana": 0, "offline_time": 0}
+        
+        from datetime import datetime
+        
+        try:
+            if isinstance(self.last_login, str):
+                last_login_time = datetime.fromisoformat(self.last_login.split('.')[0])
+            else:
+                last_login_time = self.last_login
+            
+            now = datetime.now()
+            offline_seconds = int((now - last_login_time).total_seconds())
+            
+            if offline_seconds < 60:
+                self.last_login = now.isoformat()
+                return {"hp": 0, "mana": 0, "offline_time": 0}
+            
+            # Кожні 60 секунд = 1 тік регенерації
+            regen_ticks = offline_seconds // 60
+            
+            # HP: (stamina + 1) за хвилину
+            hp_per_tick = self.stamina + 1
+            hp_regen = min(hp_per_tick * regen_ticks, self.max_health - self.health)
+            
+            # Мана: (intelligence + 1) за хвилину
+            mana_per_tick = self.intelligence + 1
+            mana_regen = min(mana_per_tick * regen_ticks, self.max_mana - self.mana)
+            
+            if hp_regen > 0:
+                self.health = min(self.health + hp_regen, self.max_health)
+            
+            if mana_regen > 0:
+                self.mana = min(self.mana + mana_regen, self.max_mana)
+            
+            self.last_login = now.isoformat()
+            
+            return {
+                "hp": hp_regen,
+                "mana": mana_regen,
+                "offline_time": offline_seconds
+            }
+        except:
+            from datetime import datetime
+            self.last_login = datetime.now().isoformat()
+            return {"hp": 0, "mana": 0, "offline_time": 0}
     
     def to_dict(self) -> Dict:
         """Конвертує у словник для збереження в БД"""
@@ -558,13 +605,13 @@ class Player:
         player.free_points = data.get("free_points", 5)
         player.last_login = data.get("last_login")
         
-        player.strength = data.get("strength", 0)
-        player.agility = data.get("agility", 0)
-        player.intelligence = data.get("intelligence", 0)
-        player.stamina = data.get("stamina", 0)
-        player.charisma = data.get("charisma", 0)
+        player.strength = data.get("strength", 10)
+        player.agility = data.get("agility", 10)
+        player.intelligence = data.get("intelligence", 10)
+        player.stamina = data.get("stamina", 10)
+        player.charisma = data.get("charisma", 10)
         
-        player.max_health = data.get("max_health", 20)
+        player.max_health = data.get("max_health", 100)
         player.health = min(data.get("health", player.max_health), player.max_health)
         
         if "max_mana" in data and data.get("max_mana"):
@@ -627,85 +674,3 @@ class Player:
         player.total_damage_taken = data.get("total_damage_taken", 0)
         
         return player
-
-    # У файлі src/models/player.py
-# Знайдіть метод regenerate_health (приблизно рядок 250-260)
-# І ОДРАЗУ ПІСЛЯ НЬОГО додайте цей новий метод:
-
-    def regenerate_health(self, in_combat: bool = False) -> int:
-        """Пасивна регенерація здоров'я на основі витривалості"""
-        if self.health >= self.max_health:
-            return 0
-        
-        if in_combat:
-            regen_amount = max(1, int(self.stamina * 0.25))
-        else:
-            regen_amount = self.stamina + 1
-        
-        return self.heal(regen_amount)
-    
-    # ✨ ДОДАЙТЕ ЦЕЙ НОВИЙ МЕТОД ОДРАЗУ ПІСЛЯ regenerate_health:
-    def apply_offline_regeneration(self):
-        """Застосовує регенерацію за час офлайну на основі stamina"""
-        if not self.last_login:
-            # Якщо це перший раз - встановлюємо час
-            from datetime import datetime
-            self.last_login = datetime.now().isoformat()
-            return {"hp": 0, "mana": 0, "offline_time": 0}
-        
-        from datetime import datetime
-        
-        try:
-            # Парсимо час останнього входу
-            if isinstance(self.last_login, str):
-                last_login_str = self.last_login.split('.')[0]
-                last_login_time = datetime.fromisoformat(last_login_str)
-            else:
-                last_login_time = self.last_login
-            
-            # Розраховуємо час офлайну в секундах
-            now = datetime.now()
-            offline_seconds = int((now - last_login_time).total_seconds())
-            
-            # Якщо менше 10 секунд - не регенеруємо
-            if offline_seconds < 10:
-                self.last_login = now.isoformat()
-                return {"hp": 0, "mana": 0, "offline_time": 0}
-            
-            # Регенерація на основі stamina та intelligence
-            # Кожні 60 секунд = 1 тік регенерації
-            regen_ticks = offline_seconds // 60
-            
-            # HP регенерація: (stamina + 1) за хвилину
-            hp_per_tick = self.stamina + 1
-            total_hp_regen = hp_per_tick * regen_ticks
-            hp_regen = min(total_hp_regen, self.max_health - self.health)
-            
-            # Мана регенерація: (intelligence + 1) за хвилину
-            mana_per_tick = self.intelligence + 1
-            total_mana_regen = mana_per_tick * regen_ticks
-            mana_regen = min(total_mana_regen, self.max_mana - self.mana)
-            
-            # Застосовуємо регенерацію
-            if hp_regen > 0:
-                self.health = min(self.health + hp_regen, self.max_health)
-            
-            if mana_regen > 0:
-                self.mana = min(self.mana + mana_regen, self.max_mana)
-            
-            # Оновлюємо час входу
-            self.last_login = now.isoformat()
-            
-            return {
-                "hp": hp_regen,
-                "mana": mana_regen,
-                "offline_time": offline_seconds
-            }
-            
-        except Exception as e:
-            # Якщо помилка - просто оновлюємо last_login
-            from datetime import datetime
-            self.last_login = datetime.now().isoformat()
-            return {"hp": 0, "mana": 0, "offline_time": 0}
-    
-    # Далі йдуть інші методи (is_alive, equip_item і т.д.)

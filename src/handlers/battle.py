@@ -4,6 +4,7 @@ import logging
 import random
 from aiogram import Router, F, types
 from typing import Optional
+import random
 
 from src.database import Database
 from src.models.player import Player
@@ -13,6 +14,9 @@ from src.ui.keyboards import get_city_keyboard, get_adventure_main_keyboard
 from src.config.constants import LOCATIONS
 from src.utils.skill_checks import SkillCheck, get_random_event
 from src.models.quest import Quest, QuestStatus
+
+# Forward declaration для IDE
+async def monster_turn(callback, battle_state, battle_log): ...
 
 router = Router()
 logger = logging.getLogger(__name__)
@@ -66,18 +70,23 @@ class BattleState:
     def __init__(self, player: Player, monster: Monster):
         self.player = player
         self.monster = monster
+        self.abilities_used = set()
         self.round = 1
         self.battle_log = []
         
         # Тимчасові ефекти
-        self.divine_shield_active = False  # Щит паладина
-        self.abilities_used = set()  # Використані здібності в цьому бою
-    
-    def add_log(self, message: str):
-        """Додає запис у лог"""
-        self.battle_log.append(message)
-        if len(self.battle_log) > 3:
-            self.battle_log.pop(0)
+        self.divine_shield_active = False
+        
+        # Лічильники використань здібностей за бій
+        self.fireballs_used = 0  # Маг
+        self.smite_undead_used = 0  # Паладин
+        
+        self.max_fireballs = 3
+        self.max_smite_undead = 3
+        
+        # ✨ НОВЕ: Отрута розбійника
+        self.poison_stacks = 0  # Кількість ходів з отрутою
+        self.poison_damage = 0  # Урон отрути за хід
 
 
 def get_battle_keyboard(player: Player, battle_state: BattleState) -> types.InlineKeyboardMarkup:
@@ -89,48 +98,74 @@ def get_battle_keyboard(player: Player, battle_state: BattleState) -> types.Inli
     
     # Додаємо кнопку навички класу
     if player.character_class == "mage":
-        if player.can_use_ability("fireball"):
+        if player.can_use_ability("fireball") and battle_state.fireballs_used < battle_state.max_fireballs:
             buttons.append([
                 types.InlineKeyboardButton(
-                    text=f"🔥 Вогняний шар (5 мани)",
+                    text=f"🔥 Вогняний шар (5 мани) [{battle_state.fireballs_used}/{battle_state.max_fireballs}]",
                     callback_data="battle_ability_fireball"
                 )
             ])
     
     elif player.character_class == "warrior":
         if "mighty_strike" not in battle_state.abilities_used:
+            if player.can_use_ability("mighty_strike"):
+                buttons.append([
+                    types.InlineKeyboardButton(
+                        text="💪 Могутній удар (6 мани, 1 раз)",
+                        callback_data="battle_ability_mighty_strike"
+                    )
+                ])
+            else:
+                buttons.append([
+                    types.InlineKeyboardButton(
+                        text="💪 Могутній удар (❌ мало мани)",
+                        callback_data="battle_no_mana"
+                    )
+                ])
+    
+    elif player.character_class == "rogue":
+        if player.can_use_ability("poison_strike"):
             buttons.append([
                 types.InlineKeyboardButton(
-                    text="💪 Могутній удар",
-                    callback_data="battle_ability_mighty_strike"
+                    text="🗡️☠️ Ядовитий удар (4 мани)",
+                    callback_data="battle_ability_poison_strike"
                 )
             ])
     
     elif player.character_class == "paladin":
-        if "divine_shield" not in battle_state.abilities_used:
+        if player.can_use_ability("divine_shield") and not battle_state.divine_shield_active:
             buttons.append([
                 types.InlineKeyboardButton(
-                    text="✨ Божественний щит",
+                    text="✨ Божественний щит (5 мани)",
                     callback_data="battle_ability_divine_shield"
                 )
             ])
-    
-    elif player.character_class == "rogue":
-        if "critical_strike" not in battle_state.abilities_used:
+        
+        if player.can_use_ability("smite_undead") and battle_state.smite_undead_used < battle_state.max_smite_undead:
             buttons.append([
                 types.InlineKeyboardButton(
-                    text="🗡️ Критичний удар",
-                    callback_data="battle_ability_critical_strike"
+                    text=f"⚡ Знищення нежиті (5 мани) [{battle_state.smite_undead_used}/{battle_state.max_smite_undead}]",
+                    callback_data="battle_ability_smite_undead"
                 )
             ])
     
-    # Зілля та втеча
-    buttons.extend([
-        [types.InlineKeyboardButton(text="🧪 Використати зілля", callback_data="battle_use_potion")],
-        [types.InlineKeyboardButton(text="💨 Втекти", callback_data="battle_flee")]
+    # Кнопки зілль і втечі
+    if player.inventory:
+        buttons.append([
+            types.InlineKeyboardButton(text="🧪 Зілля", callback_data="battle_use_potion")
+        ])
+    
+    buttons.append([
+        types.InlineKeyboardButton(text="💨 Втекти", callback_data="battle_flee")
     ])
     
     return types.InlineKeyboardMarkup(inline_keyboard=buttons)
+
+
+# Додайте обробник для "немає мани"
+@router.callback_query(F.data == "battle_no_mana")
+async def battle_no_mana(callback: types.CallbackQuery):
+    await callback.answer("❌ Недостатньо мани! Випийте зілля мани.", show_alert=True)
 
 
 # ==================== ПОЧАТОК БОЮ ====================
@@ -355,7 +390,15 @@ async def start_monster_encounter(callback: types.CallbackQuery, location_id: st
     """Створює зустріч з монстром"""
     available_monsters = location.get("monsters", ["wolf"])
     monster_type = random.choice(available_monsters)
-    monster_level = max(1, player.level + random.randint(-1, 1))
+    
+    # ✨ ВИПРАВЛЕННЯ: Рівень монстра базується на локації, а не на гравці
+    location_level = location.get("level_required", 1)
+    
+    # Монстр може бути ±1 рівень від рівня локації
+    # Але не менше 1 і не більше ніж рівень локації + 2
+    monster_level = location_level + random.randint(-1, 1)
+    monster_level = max(1, min(monster_level, location_level + 2))
+    
     monster = Monster(monster_type, monster_level)
     
     battle_state = BattleState(player, monster)
@@ -566,11 +609,46 @@ async def battle_attack(callback: types.CallbackQuery):
             
             if is_critical:
                 battle_log.append(f"💥 КРИТИЧНИЙ УДАР! (випало 20)")
+            
+            # ✨ ПАСИВКА РОЗБІЙНИКА - Критичний удар
+            if player.character_class == "rogue" and not is_critical:
+                crit_chance = player.get_critical_chance()
+                if random.randint(1, 100) <= crit_chance:
+                    damage *= 2
+                    battle_log.append(f"🗡️ ПАСИВКА: Критичний удар розбійника! ({crit_chance}%)")
+                    battle_log.append(f"💥 Урон подвоєно!")
+            
             battle_log.append(f"🎲 d20: {d20_result} + {attack_bonus} = {total_roll} (AC {monster_ac})")
             battle_log.append(f"⚔️ Урон: {damage_desc}")
         
         monster.health -= damage
         player.total_damage_dealt += damage
+        
+        # ✨ ПАСИВКА ВОЇНА - Подвійний удар
+        if player.character_class == "warrior":
+            double_chance = player.get_double_attack_chance()
+            if random.randint(1, 100) <= double_chance:
+                # Другий удар
+                d20_second, total_second, is_crit_second = CombatCalculator.attack_roll(attack_bonus)
+                
+                battle_log.append(f"\n⚔️⚔️ ПАСИВКА: Подвійний удар! ({double_chance}%)")
+                
+                if total_second >= monster_ac or is_crit_second:
+                    # Попадання другого удару
+                    if weapon:
+                        damage_second, desc_second = CombatCalculator.damage_roll(weapon, stat_bonus, is_crit_second)
+                        
+                        if is_crit_second:
+                            battle_log.append(f"💥 Другий удар - КРИТ!")
+                    else:
+                        damage_second = 1 + (player.strength - 10) // 2
+                        desc_second = str(damage_second)
+                    
+                    monster.health -= damage_second
+                    player.total_damage_dealt += damage_second
+                    battle_log.append(f"🎲 d20: {d20_second} → Урон: {desc_second}")
+                else:
+                    battle_log.append(f"❌ Другий удар промахнувся! (d20: {d20_second})")
     
     # Промах
     else:
@@ -583,8 +661,10 @@ async def battle_attack(callback: types.CallbackQuery):
     
     # Хід монстра
     await monster_turn(callback, battle_state, battle_log)
+# ↑↑↑ ТУТ ЗАКІНЧУЄТЬСЯ battle_attack ↑↑↑
 
 
+# ↓↓↓ ТУТ ПОЧИНАЄТЬСЯ monster_turn ↓↓↓
 async def monster_turn(callback: types.CallbackQuery, battle_state: BattleState, battle_log: list):
     """Хід монстра з анімацією"""
     import asyncio
@@ -687,61 +767,131 @@ async def use_class_ability(callback: types.CallbackQuery):
     
     battle_log = []
     
+    # ========== МАГ: Вогняний шар ==========
     if ability == "fireball":
+        if battle_state.fireballs_used >= battle_state.max_fireballs:
+            await callback.answer(f"❌ Ви вже використали Вогняний шар {battle_state.max_fireballs} рази!", show_alert=True)
+            return
+        
         if not player.can_use_ability("fireball"):
             await callback.answer("❌ Недостатньо мани!", show_alert=True)
             return
         
         player.use_ability("fireball")
+        battle_state.fireballs_used += 1
         
         stat_bonus = (player.intelligence + player.get_total_stat_bonus("intelligence") - 10) // 2
         damage, damage_desc = CombatCalculator.spell_damage("2d6", stat_bonus)
         
-        battle_log.append("🔥 Ви використовуєте Вогняний шар!")
-        battle_log.append(f"✨ Магічний урон: {damage_desc}")
+        battle_log.append(f"🔥 Ви використовуєте Вогняний шар! ({battle_state.fireballs_used}/{battle_state.max_fireballs})")
+        battle_log.append(f"🎲 {damage_desc}")
         
         monster.health -= damage
         player.total_damage_dealt += damage
-        
+    
+    # ========== ВОЇН: Могутній удар ==========
     elif ability == "mighty_strike":
+        if "mighty_strike" in battle_state.abilities_used:
+            await callback.answer("❌ Ви вже використали Могутній удар!", show_alert=True)
+            return
+        
+        if not player.can_use_ability("mighty_strike"):
+            await callback.answer("❌ Недостатньо мани! (потрібно 6)", show_alert=True)
+            return
+        
+        player.use_ability("mighty_strike")
         battle_state.abilities_used.add("mighty_strike")
         
         weapon = player.equipment.get("weapon")
-        stat_bonus = (player.strength + player.get_total_stat_bonus("strength") - 10) // 2
-        
-        if weapon:
-            damage, damage_desc = CombatCalculator.damage_roll(weapon, stat_bonus, is_critical=True)
+        if not weapon:
+            damage = int((1 + (player.strength - 10) // 2) * 2.5)
         else:
-            damage = (1 + stat_bonus) * 2
-            damage_desc = f"{damage}"
+            stat_bonus = (player.strength + player.get_total_stat_bonus("strength") - 10) // 2
+            base_damage, _ = CombatCalculator.damage_roll(weapon, stat_bonus, False)
+            damage = int(base_damage * 2.5)
         
-        battle_log.append("💪 Ви використовуєте Могутній удар!")
-        battle_log.append(f"⚔️ Подвійний урон: {damage_desc}")
+        battle_log.append("⚔️ Ви використовуєте Могутній удар!")
+        battle_log.append(f"💥 × 2.5 урону: {damage}")
         
         monster.health -= damage
         player.total_damage_dealt += damage
+    
+    # ========== РОЗБІЙНИК: Ядовитий удар ==========
+    elif ability == "poison_strike":
+        if not player.can_use_ability("poison_strike"):
+            await callback.answer("❌ Недостатньо мани! (потрібно 4)", show_alert=True)
+            return
         
+        player.use_ability("poison_strike")
+        
+        # Наносимо звичайний удар
+        weapon = player.equipment.get("weapon")
+        attack_bonus = player.get_attack_bonus()
+        d20_result, total_roll, is_critical = CombatCalculator.attack_roll(attack_bonus)
+        monster_ac = monster.defense + 10
+        
+        if total_roll >= monster_ac or is_critical:
+            if weapon:
+                stat_bonus = (player.agility + player.get_total_stat_bonus("agility") - 10) // 2
+                damage, damage_desc = CombatCalculator.damage_roll(weapon, stat_bonus, is_critical)
+            else:
+                damage = 1 + (player.agility - 10) // 2
+                damage_desc = str(damage)
+            
+            monster.health -= damage
+            player.total_damage_dealt += damage
+            
+            battle_log.append(f"🗡️ Ви використовуєте Ядовитий удар!")
+            battle_log.append(f"⚔️ Урон: {damage_desc}")
+            
+            # Накладаємо отруту на 3 ходи
+            battle_state.poison_stacks = 3
+            battle_state.poison_damage = random.randint(1, 4)  # 1d4
+            battle_log.append(f"☠️ Отрута накладена! ({battle_state.poison_damage} урону за хід, 3 ходи)")
+        else:
+            battle_log.append(f"🗡️ Ядовитий удар...")
+            battle_log.append(f"❌ Промах! d20: {d20_result}")
+    
+    # ========== ПАЛАДИН: Божественний щит ==========
     elif ability == "divine_shield":
-        battle_state.abilities_used.add("divine_shield")
+        if battle_state.divine_shield_active:
+            await callback.answer("❌ Щит вже активний!", show_alert=True)
+            return
+        
+        if not player.can_use_ability("divine_shield"):
+            await callback.answer("❌ Недостатньо мани!", show_alert=True)
+            return
+        
+        player.use_ability("divine_shield")
         battle_state.divine_shield_active = True
         
         battle_log.append("✨ Ви активуєте Божественний щит!")
-        battle_log.append("🛡️ Наступна атака ворога буде заблокована")
+        battle_log.append("🛡️ Наступна атака монстра буде заблокована")
+    
+    # ========== ПАЛАДИН: Знищення нежиті ==========
+    elif ability == "smite_undead":
+        if battle_state.smite_undead_used >= battle_state.max_smite_undead:
+            await callback.answer(f"❌ Ви вже використали Знищення нежиті {battle_state.max_smite_undead} рази!", show_alert=True)
+            return
         
-    elif ability == "critical_strike":
-        battle_state.abilities_used.add("critical_strike")
+        if not player.can_use_ability("smite_undead"):
+            await callback.answer("❌ Недостатньо мани!", show_alert=True)
+            return
         
-        weapon = player.equipment.get("weapon")
-        stat_bonus = (player.agility + player.get_total_stat_bonus("agility") - 10) // 2
+        # Перевірка чи це нежить
+        undead_types = ["skeleton", "zombie", "ghost", "vampire"]
+        if monster.monster_type not in undead_types:
+            await callback.answer("❌ Ця здібність працює лише проти нежиті!", show_alert=True)
+            return
         
-        if weapon:
-            base_damage, _ = CombatCalculator.damage_roll(weapon, stat_bonus, is_critical=False)
-            damage = int(base_damage * 2.5)
-        else:
-            damage = int((1 + stat_bonus) * 2.5)
+        player.use_ability("smite_undead")
+        battle_state.smite_undead_used += 1
         
-        battle_log.append("🗡️ Ви використовуєте Критичний удар!")
-        battle_log.append(f"💥 × 2.5 урону: {damage}")
+        # Кидок 1d20 урону
+        damage = random.randint(1, 20)
+        
+        battle_log.append(f"⚡ Ви використовуєте Знищення нежиті! ({battle_state.smite_undead_used}/{battle_state.max_smite_undead})")
+        battle_log.append(f"🎲 d20: {damage} святого урону")
         
         monster.health -= damage
         player.total_damage_dealt += damage
@@ -751,6 +901,29 @@ async def use_class_ability(callback: types.CallbackQuery):
         return
     
     await monster_turn(callback, battle_state, battle_log)
+
+
+# ============================================================
+# КРОК 7: Додати урон отрути в monster_turn
+# ============================================================
+# У функції monster_turn ПЕРЕД "Наступний раунд" додайте:
+
+    # ✨ НОВЕ: Урон від отрути
+    if battle_state.poison_stacks > 0:
+        poison_dmg = battle_state.poison_damage
+        monster.health -= poison_dmg
+        battle_log.append(f"\n☠️ Отрута наносить {poison_dmg} урону")
+        battle_state.poison_stacks -= 1
+        
+        if battle_state.poison_stacks > 0:
+            battle_log.append(f"☠️ Отрута діє ще {battle_state.poison_stacks} ходів")
+        else:
+            battle_log.append(f"✓ Отрута перестала діяти")
+        
+        # Перевірка смерті від отрути
+        if monster.health <= 0:
+            await handle_victory(callback, battle_state, battle_log)
+            return
 
 
 async def handle_victory(callback: types.CallbackQuery, battle_state: BattleState, battle_log: list):
@@ -881,7 +1054,8 @@ async def battle_use_potion(callback: types.CallbackQuery):
     
     potion_text = (
         f"🧪 **Оберіть зілля:**\n\n"
-        f"❤️ Ваше поточне HP: {player.health}/{player.max_health}\n\n"
+        f"❤️ HP: {player.health}/{player.max_health}\n"
+        f"💙 Мана: {player.mana}/{player.max_mana}\n\n"
     )
     
     keyboard_buttons = []
@@ -890,6 +1064,7 @@ async def battle_use_potion(callback: types.CallbackQuery):
         effect_type = potion.get("effect_type", "")
         effect_value = potion.get("effect_value", 0)
         
+        # Зілля здоров'я
         if effect_type == "heal":
             keyboard_buttons.append([
                 types.InlineKeyboardButton(
@@ -897,10 +1072,21 @@ async def battle_use_potion(callback: types.CallbackQuery):
                     callback_data=f"battle_drink_{real_index}"
                 )
             ])
+        
         elif effect_type == "full_heal":
             keyboard_buttons.append([
                 types.InlineKeyboardButton(
-                    text=f"{name} (повне лікування)",
+                    text=f"{name} (повне HP)",
+                    callback_data=f"battle_drink_{real_index}"
+                )
+            ])
+        
+        # ✨ Зілля мани
+        elif effect_type == "mana":
+            percent = int(effect_value * 100)
+            keyboard_buttons.append([
+                types.InlineKeyboardButton(
+                    text=f"{name} (+{percent}% мани)",
                     callback_data=f"battle_drink_{real_index}"
                 )
             ])
@@ -983,6 +1169,7 @@ async def battle_drink_potion(callback: types.CallbackQuery):
     
     battle_log = []
     
+    # ========== ЗІЛЛЯ ЗДОРОВ'Я ==========
     if effect_type == "heal":
         if current_hp >= max_hp:
             await callback.answer("❤️ Ви вже на повному здоров'ї!", show_alert=True)
@@ -1002,15 +1189,37 @@ async def battle_drink_potion(callback: types.CallbackQuery):
         player.health = max_hp
         battle_log.append(f"🧪 Ви випили {potion_name}")
         battle_log.append(f"✨ Повністю відновлено! (+{healed} HP)")
+    
+    # ========== ✨ НОВЕ: ЗІЛЛЯ МАНИ ==========
+    elif effect_type == "mana":
+        current_mana = player.mana
+        max_mana = player.max_mana
+        
+        if current_mana >= max_mana:
+            await callback.answer("💙 Ви вже на повній мані!", show_alert=True)
+            return
+        
+        # effect_value - це % (0.25, 0.5, 1.0)
+        mana_restored = int(max_mana * effect_value)
+        mana_restored = min(mana_restored, max_mana - current_mana)
+        
+        player.mana += mana_restored
+        battle_log.append(f"🧪 Ви випили {potion_name}")
+        battle_log.append(f"💙 Відновлено {mana_restored} мани")
+    
+    # ========== НЕВІДОМИЙ ТИП ==========
     else:
         await callback.answer("❌ Невідомий тип зілля!")
         return
     
+    # Видаляємо зілля з інвентаря
     player.inventory.pop(real_index)
     
+    # Зберігаємо зміни
     db = Database()
     await db.save_player(player.to_dict())
     
+    # Хід монстра після використання зілля
     await monster_turn(callback, battle_state, battle_log)
 
 

@@ -366,7 +366,6 @@ async def show_potions(callback: types.CallbackQuery):
 async def use_potion(callback: types.CallbackQuery):
     """Використовує зілля"""
     try:
-        # РЕАЛЬНИЙ індекс в inventory
         real_index = int(callback.data.replace("use_real_", ""))
     except ValueError:
         await callback.answer("❌ Помилка!")
@@ -376,14 +375,12 @@ async def use_potion(callback: types.CallbackQuery):
     player_data = await db.get_player(callback.from_user.id)
     player = Player.from_dict(player_data)
     
-    # Перевіряємо індекс
     if real_index < 0 or real_index >= len(player.inventory):
         await callback.answer("❌ Зілля не знайдено!")
         return
     
     potion = player.inventory[real_index]
     
-    # Перевіряємо що це дійсно зілля
     if not isinstance(potion, dict) or potion.get("type") != "potion":
         await callback.answer("❌ Це не зілля!")
         return
@@ -394,14 +391,10 @@ async def use_potion(callback: types.CallbackQuery):
     
     result_text = f"🧪 **Ви випили {potion_name}!**\n\n"
     
-    # Використовуємо зілля
+    # ЗІЛЛЯ ЗДОРОВ'Я
     if effect_type == "heal":
-        # Звичайне лікування
         if player.health >= player.max_health:
-            await callback.answer(
-                "❤️ Ви вже на повному здоров'ї!",
-                show_alert=True
-            )
+            await callback.answer("❤️ Ви вже на повному здоров'ї!", show_alert=True)
             return
         
         healed = player.heal(effect_value)
@@ -409,12 +402,8 @@ async def use_potion(callback: types.CallbackQuery):
         result_text += f"❤️ Здоров'я: {player.health}/{player.max_health}"
         
     elif effect_type == "full_heal":
-        # Повне лікування
         if player.health >= player.max_health:
-            await callback.answer(
-                "❤️ Ви вже на повному здоров'ї!",
-                show_alert=True
-            )
+            await callback.answer("❤️ Ви вже на повному здоров'ї!", show_alert=True)
             return
         
         healed = player.max_health - player.health
@@ -422,36 +411,40 @@ async def use_potion(callback: types.CallbackQuery):
         result_text += f"✨ Повністю відновлено!\n"
         result_text += f"❤️ Здоров'я: {player.health}/{player.max_health}"
     
-    else:
-        await callback.answer("❌ Невідомий тип зілля!")
+    # ✨ ЗІЛЛЯ МАНИ
+    elif effect_type == "mana":
+        if player.mana >= player.max_mana:
+            await callback.answer("💙 Ви вже на повній мані!", show_alert=True)
+            return
+        
+        mana_restored = int(player.max_mana * effect_value)
+        mana_restored = min(mana_restored, player.max_mana - player.mana)
+        player.mana += mana_restored
+        
+        result_text += f"💙 Відновлено {mana_restored} мани\n"
+        result_text += f"💙 Мана: {player.mana}/{player.max_mana}"
+    
+    # БАФИ (не можна використати поза боєм)
+    elif effect_type == "buff":
+        await callback.answer("⚠️ Це зілля можна використати тільки перед боєм!", show_alert=True)
         return
     
-    # Видаляємо зілля використовуючи РЕАЛЬНИЙ індекс
+    else:
+        await callback.answer(f"❌ Невідомий тип зілля: {effect_type}!", show_alert=True)
+        return
+    
+    # Видаляємо зілля
     player.inventory.pop(real_index)
     
     # Зберігаємо
     await db.save_player(player.to_dict())
     
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
-        [
-            types.InlineKeyboardButton(
-                text="🧪 Ще зілля",
-                callback_data="inv_potions"
-            )
-        ],
-        [
-            types.InlineKeyboardButton(
-                text="🔙 До інвентаря",
-                callback_data="inv_back"
-            )
-        ]
+        [types.InlineKeyboardButton(text="🧪 Ще зілля", callback_data="inv_potions")],
+        [types.InlineKeyboardButton(text="🔙 До інвентаря", callback_data="inv_back")]
     ])
     
-    await callback.message.edit_text(
-        result_text,
-        reply_markup=keyboard,
-        parse_mode="Markdown"
-    )
+    await callback.message.edit_text(result_text, reply_markup=keyboard, parse_mode="Markdown")
     await callback.answer("✅ Зілля використано!")
 
 

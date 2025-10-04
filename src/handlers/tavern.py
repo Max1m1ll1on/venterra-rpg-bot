@@ -9,7 +9,11 @@ from src.models.player import Player
 router = Router()
 logger = logging.getLogger(__name__)
 
-# Асортимент таверни з особливими зіллями
+# ============================================================
+# КРОК 1: Додати зілля мани в src/handlers/tavern.py
+# ============================================================
+# Знайдіть словник TAVERN_POTIONS і додайте ДО НЬОГО ці 3 зілля:
+
 TAVERN_POTIONS = {
     "health_potion": {
         "name": "❤️ Зілля здоров'я",
@@ -69,6 +73,32 @@ TAVERN_POTIONS = {
         "effect_type": "full_heal",
         "effect_value": 0,
         "description": "Повністю відновлює HP"
+    },
+    
+    # ✨ НОВІ ЗІЛЛЯ МАНИ - ДОДАЙТЕ ЦІ 3 РЯДКИ:
+    "small_mana": {
+        "name": "💙 Мале зілля мани",
+        "price": 30,
+        "type": "potion",
+        "effect_type": "mana",
+        "effect_value": 0.25,  # 25% мани
+        "description": "Відновлює 25% мани"
+    },
+    "medium_mana": {
+        "name": "💙 Середнє зілля мани",
+        "price": 60,
+        "type": "potion",
+        "effect_type": "mana",
+        "effect_value": 0.5,  # 50% мани
+        "description": "Відновлює 50% мани"
+    },
+    "large_mana": {
+        "name": "💙 Велике зілля мани",
+        "price": 100,
+        "type": "potion",
+        "effect_type": "mana",
+        "effect_value": 1.0,  # 100% мани
+        "description": "Повністю відновлює ману"
     }
 }
 
@@ -348,6 +378,7 @@ async def buy_potion(callback: types.CallbackQuery):
 async def talk_to_bard(callback: types.CallbackQuery):
     """Розмова з бардом"""
     import random
+    import time
     
     stories = [
         (
@@ -389,7 +420,12 @@ async def talk_to_bard(callback: types.CallbackQuery):
         )
     ]
     
+    # ✨ ВИПРАВЛЕННЯ: Додаємо timestamp щоб кожне повідомлення було унікальним
     story = random.choice(stories)
+    timestamp = int(time.time())
+    
+    # Додаємо невидимий символ з timestamp щоб текст завжди був різним
+    story_with_timestamp = f"{story}\n\n🕐 _(Оповідь #{timestamp})_"
     
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=[
         [types.InlineKeyboardButton(
@@ -402,12 +438,22 @@ async def talk_to_bard(callback: types.CallbackQuery):
         )]
     ])
     
-    await callback.message.edit_text(
-        story,
-        reply_markup=keyboard,
-        parse_mode="Markdown"
-    )
-    await callback.answer()
+    # ✨ ДОДАТКОВО: Обробка помилки якщо все ж таки текст ідентичний
+    try:
+        await callback.message.edit_text(
+            story_with_timestamp,
+            reply_markup=keyboard,
+            parse_mode="Markdown"
+        )
+        await callback.answer()
+    except Exception as e:
+        # Якщо помилка "message is not modified" - просто ігноруємо
+        if "message is not modified" in str(e):
+            await callback.answer("🎵 Бард повторює історію...")
+        else:
+            # Інші помилки - логуємо
+            logger.error(f"Помилка в talk_to_bard: {e}")
+            await callback.answer("❌ Помилка", show_alert=True)
 
 
 # ==================== ГРА В КОСТІ ====================

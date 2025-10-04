@@ -10,6 +10,6 @@
     "\\src\\ui",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\config\\constants.py",
+  "SelectedNode": "\\src\\handlers\\inventory.py",
   "PreviewInSolutionExplorer": false
 }
