@@ -411,7 +411,7 @@ async def use_potion(callback: types.CallbackQuery):
         result_text += f"✨ Повністю відновлено!\n"
         result_text += f"❤️ Здоров'я: {player.health}/{player.max_health}"
     
-    # ✨ ЗІЛЛЯ МАНИ
+    # ЗІЛЛЯ МАНИ
     elif effect_type == "mana":
         if player.mana >= player.max_mana:
             await callback.answer("💙 Ви вже на повній мані!", show_alert=True)
@@ -424,10 +424,35 @@ async def use_potion(callback: types.CallbackQuery):
         result_text += f"💙 Відновлено {mana_restored} мани\n"
         result_text += f"💙 Мана: {player.mana}/{player.max_mana}"
     
-    # БАФИ (не можна використати поза боєм)
+    # ✨ БАФИ З ТАЙМЕРОМ (3 хвилини)
     elif effect_type == "buff":
-        await callback.answer("⚠️ Це зілля можна використати тільки перед боєм!", show_alert=True)
-        return
+        from datetime import datetime, timedelta
+        
+        stat = potion.get("effect_stat")
+        value = effect_value
+        
+        # Створюємо баф з таймером
+        buff_end_time = (datetime.now() + timedelta(minutes=3)).isoformat()
+        
+        buff = {
+            "type": "buff",
+            "stat": stat,
+            "value": value,
+            "expires_at": buff_end_time
+        }
+        
+        player.active_effects.append(buff)
+        
+        stat_names = {
+            "strength": "💪 Сила",
+            "agility": "🏃 Спритність",
+            "stamina": "🛡️ Витривалість",
+            "intelligence": "🧠 Інтелект"
+        }
+        
+        stat_name = stat_names.get(stat, stat)
+        result_text += f"{stat_name} +{value}\n"
+        result_text += f"⏰ Діє 3 хвилини"
     
     else:
         await callback.answer(f"❌ Невідомий тип зілля: {effect_type}!", show_alert=True)

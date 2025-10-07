@@ -284,11 +284,11 @@ class Player:
         weapon_type = weapon.get("weapon_type", "melee")
         
         if weapon_type == "melee":
-            stat = self.strength + self.get_total_stat_bonus("strength")
+            stat = self.strength + self.get_total_stat_bonus("strength") + self.get_active_buff_bonus("strength")
         elif weapon_type == "ranged":
-            stat = self.agility + self.get_total_stat_bonus("agility")
+            stat = self.agility + self.get_total_stat_bonus("agility") + self.get_active_buff_bonus("agility")
         elif weapon_type == "magic":
-            stat = self.intelligence + self.get_total_stat_bonus("intelligence")
+            stat = self.intelligence + self.get_total_stat_bonus("intelligence") + self.get_active_buff_bonus("intelligence")
         else:
             stat = self.strength
         
@@ -501,6 +501,46 @@ class Player:
         base_chance = 25
         agility_bonus = max(0, (self.agility - 10) * 2)
         return min(75, base_chance + agility_bonus)
+
+    def get_active_buff_bonus(self, stat_name: str) -> int:
+        """Отримує бонус від активних бафів для характеристики"""
+        from datetime import datetime
+        
+        bonus = 0
+        active_buffs = []
+        
+        for effect in self.active_effects:
+            if effect.get("type") == "buff" and effect.get("stat") == stat_name:
+                try:
+                    expires_at = datetime.fromisoformat(effect["expires_at"])
+                    if datetime.now() < expires_at:
+                        bonus += effect.get("value", 0)
+                        active_buffs.append(effect)
+                except:
+                    pass
+        
+        # Оновлюємо список - залишаємо тільки активні
+        self.active_effects = active_buffs
+        
+        return bonus
+    
+    def clean_expired_buffs(self):
+        """Видаляє прострочені бафи"""
+        from datetime import datetime
+        
+        active = []
+        for effect in self.active_effects:
+            if effect.get("type") == "buff":
+                try:
+                    expires_at = datetime.fromisoformat(effect["expires_at"])
+                    if datetime.now() < expires_at:
+                        active.append(effect)
+                except:
+                    pass
+            else:
+                active.append(effect)
+        
+        self.active_effects = active
 
     def apply_offline_regeneration(self):
         """Застосовує регенерацію за час офлайну на основі stamina та intelligence"""
