@@ -26,7 +26,7 @@ async def cmd_start(message: types.Message):
         player = Player.from_dict(player_data)
         
         # ✨ Застосовуємо офлайн регенерацію
-        regen_result = player.apply_offline_regeneration()
+        regen_result = player.apply_regeneration()
         
         # Зберігаємо оновлений стан
         if regen_result["hp"] > 0 or regen_result["mana"] > 0:
