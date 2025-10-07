@@ -25,8 +25,8 @@ async def cmd_start(message: types.Message):
         # Гравець вже існує - вітаємо повернення
         player = Player.from_dict(player_data)
         
-        # ✨ Застосовуємо офлайн регенерацію
-        regen_result = player.apply_offline_regeneration()
+        # ✨ ВИКОРИСТОВУЄМО ЄДИНУ СИСТЕМУ РЕГЕНЕРАЦІЇ
+        regen_result = player.apply_regeneration()
         
         # Зберігаємо оновлений стан
         if regen_result["hp"] > 0 or regen_result["mana"] > 0:
@@ -37,9 +37,9 @@ async def cmd_start(message: types.Message):
         
         # Показуємо регенерацію якщо була
         if regen_result["hp"] > 0 or regen_result["mana"] > 0:
-            offline_minutes = regen_result.get("offline_time", 0) // 60
-            if offline_minutes > 0:
-                welcome_text += f"💤 Під час вашої відсутності ({offline_minutes} хв):\n"
+            minutes = regen_result["seconds"] // 60
+            if minutes > 0:
+                welcome_text += f"💤 Під час вашої відсутності ({minutes} хв):\n"
                 if regen_result["hp"] > 0:
                     welcome_text += f"💚 Відновлено {regen_result['hp']} HP\n"
                 if regen_result["mana"] > 0:

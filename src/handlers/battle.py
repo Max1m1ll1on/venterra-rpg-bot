@@ -262,7 +262,7 @@ async def return_to_city_button(message: types.Message):
         player = Player.from_dict(player_data)
         
         # Застосовуємо регенерацію на основі ЧАСУ
-        regen_result = player.apply_offline_regeneration()
+        regen_result = player.apply_regeneration(in_combat=True)
         
         # Зберігаємо
         await db.save_player(player.to_dict())

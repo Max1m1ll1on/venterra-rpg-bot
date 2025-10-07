@@ -13,10 +13,6 @@ from src.config.settings import settings
 router = Router()
 logger = logging.getLogger(__name__)
 
-
-# Замініть обробники у src/handlers/city.py
-# Використовуємо існуючі callback'и з keyboards.py: char_stats, char_quests, char_achievements
-
 @router.message(F.text == "👤 Персонаж")
 async def show_character(message: types.Message):
     """Показує інформацію про персонажа"""
@@ -44,7 +40,7 @@ async def show_character(message: types.Message):
     player = Player.from_dict(player_data)
     
     # ✨ НОВЕ: Застосовуємо офлайн регенерацію
-    regen_result = player.apply_offline_regeneration()
+    regen_result = player.apply_regeneration()
     
     # Зберігаємо оновлений стан
     if regen_result["hp"] > 0 or regen_result["mana"] > 0:
@@ -657,7 +653,7 @@ async def return_to_city_button(message: types.Message):
         player = Player.from_dict(player_data)
         
         # Застосовуємо регенерацію на основі ЧАСУ
-        regen_result = player.apply_offline_regeneration()
+        regen_result = player.apply_regeneration()
         
         # Зберігаємо
         await db.save_player(player.to_dict())
@@ -676,8 +672,10 @@ async def return_to_city_button(message: types.Message):
         
         city_text += (
             f"Тут ви можете відпочити та підготуватися до нових пригод!\n\n"
-            #f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
-            #f"💙 Мана: {player.mana}/{player.max_mana}"
+            f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+            f"💙 Мана: {player.mana}/{player.max_mana}"
+            f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+            f"💙 Мана: {player.mana}/{player.max_mana}"
         )
         
         await message.answer(

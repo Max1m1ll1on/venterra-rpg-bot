@@ -1,7 +1,8 @@
-﻿# src/models/player.py - Модель гравця
+﻿# src/models/player.py - Модель гравця (ОПТИМІЗОВАНА ВЕРСІЯ)
 
 import json
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
+from datetime import datetime, timedelta
 
 from src.config.constants import CLASS_BASE_STATS, CharacterClass
 from src.config.settings import settings
@@ -16,7 +17,9 @@ class Player:
         self.username = username
         self.character_name = character_name or "Безіменний"
         self.character_class = character_class
-        self.last_login = None
+        
+        # ✨ ВАЖЛИВО: Єдине поле для регенерації
+        self.last_regeneration_time = datetime.now().isoformat()
         
         # Прогресія
         self.level = 1
@@ -36,11 +39,9 @@ class Player:
         # Встановлюємо базові стати за класом
         self._set_base_stats()
         
-        # Здоров'я
+        # Здоров'я та мана
         self.max_health = self._calculate_max_health()
         self.health = self.max_health
-        
-        # Мана
         self.max_mana = self._calculate_max_mana()
         self.mana = self.max_mana
         
@@ -48,7 +49,7 @@ class Player:
         self.class_abilities = self._get_class_abilities()
         self.ability_cooldowns = {}
         
-        # Екіпірування
+        # Екіпірування (12 слотів)
         self.equipment = {
             'weapon': None, 'head': None, 'chest': None, 'legs': None,
             'feet': None, 'hands': None, 'offhand': None,
@@ -79,6 +80,98 @@ class Player:
         # Активні ефекти
         self.active_effects = []
     
+    # =====================================================
+    # 🔥 ЄДИНА СИСТЕМА РЕГЕНЕРАЦІЇ
+    # =====================================================
+    
+    def apply_regeneration(self, force_update: bool = True) -> Dict[str, int]:
+        """
+        ЄДИНА функція регенерації для всієї гри
+        
+        Формула:
+        - Кожні 60 секунд = 1 тік регенерації
+        - HP за тік = stamina + 1
+        - Мана за тік = intelligence + 1
+        
+        Args:
+            force_update: Чи оновлювати час останньої регенерації
+            
+        Returns:
+            Словник з інформацією про регенерацію
+        """
+        # Парсимо час останньої регенерації
+        if not self.last_regeneration_time:
+            self.last_regeneration_time = datetime.now().isoformat()
+            return {"hp": 0, "mana": 0, "seconds": 0, "ticks": 0}
+        
+        try:
+            # Підтримка різних форматів часу
+            if isinstance(self.last_regeneration_time, str):
+                last_time = datetime.fromisoformat(self.last_regeneration_time.split('.')[0])
+            else:
+                last_time = self.last_regeneration_time
+            
+            now = datetime.now()
+            elapsed_seconds = int((now - last_time).total_seconds())
+            
+            # Менше 60 секунд - немає регенерації
+            if elapsed_seconds < 60:
+                return {"hp": 0, "mana": 0, "seconds": elapsed_seconds, "ticks": 0}
+            
+            # =====================================================
+            # ЄДИНА ФОРМУЛА РЕГЕНЕРАЦІЇ
+            # =====================================================
+            regen_ticks = elapsed_seconds // 60
+            
+            # HP регенерація
+            hp_per_tick = self.stamina + 1
+            max_hp_to_regen = self.max_health - self.health
+            hp_regen = min(hp_per_tick * regen_ticks, max_hp_to_regen)
+            
+            # Мана регенерація
+            mana_per_tick = self.intelligence + 1
+            max_mana_to_regen = self.max_mana - self.mana
+            mana_regen = min(mana_per_tick * regen_ticks, max_mana_to_regen)
+            
+            # Застосовуємо регенерацію
+            if hp_regen > 0:
+                self.health = min(self.health + hp_regen, self.max_health)
+            
+            if mana_regen > 0:
+                self.mana = min(self.mana + mana_regen, self.max_mana)
+            
+            # Оновлюємо час останньої регенерації
+            if force_update and (hp_regen > 0 or mana_regen > 0):
+                self.last_regeneration_time = now.isoformat()
+            
+            return {
+                "hp": hp_regen,
+                "mana": mana_regen,
+                "seconds": elapsed_seconds,
+                "ticks": regen_ticks
+            }
+            
+        except Exception as e:
+            print(f"Помилка регенерації: {e}")
+            self.last_regeneration_time = datetime.now().isoformat()
+            return {"hp": 0, "mana": 0, "seconds": 0, "ticks": 0}
+    
+    def apply_offline_regeneration(self) -> Dict[str, int]:
+        """
+        Застаріла функція - для зворотної сумісності
+        Використовує нову систему регенерації
+        """
+        result = self.apply_regeneration()
+        return {
+            "hp": result["hp"],
+            "mana": result["mana"],
+            "offline_time": result["seconds"]
+        }
+    
+    # =====================================================
+    # БАЗОВІ МЕТОДИ
+    # =====================================================
+    
     def _set_base_stats(self):
         """Встановлює базові характеристики за класом"""
         stats = CLASS_BASE_STATS.get(self.character_class, CLASS_BASE_STATS[CharacterClass.WARRIOR])
@@ -93,7 +186,7 @@ class Player:
         return 20 + (self.stamina * 5)
     
     def _calculate_max_mana(self) -> int:
-        """Розраховує максимальну ману на основі інтелекту"""
+        """Розраховує максимальну ману"""
         return self.intelligence * 5
     
     def _get_class_abilities(self) -> dict:
@@ -140,6 +233,10 @@ class Player:
         }
         return abilities.get(self.character_class, {})
     
+    # =====================================================
+    # ПРОГРЕСІЯ
+    # =====================================================
+    
     def get_required_experience(self) -> int:
         """Повертає необхідну кількість досвіду для наступного рівня"""
         return settings.EXP_MULTIPLIER * self.level
@@ -170,10 +267,23 @@ class Player:
         self.experience = 0
         self.free_points += 3
         
-        old_max = self.max_health
+        # Оновлюємо максимальні значення
+        old_max_health = self.max_health
+        old_max_mana = self.max_mana
+        
         self.max_health = self._calculate_max_health()
-        health_increase = self.max_health - old_max
-        self.health += health_increase
+        self.max_mana = self._calculate_max_mana()
+        
+        # Додаємо різницю до поточних значень
+        health_increase = self.max_health - old_max_health
+        mana_increase = self.max_mana - old_max_mana
+        
+        self.health = min(self.health + health_increase, self.max_health)
+        self.mana = min(self.mana + mana_increase, self.max_mana)
+    
+    # =====================================================
+    # ХАРАКТЕРИСТИКИ
+    # =====================================================
     
     def add_stat(self, stat_name: str) -> bool:
         """Додає 1 очко до характеристики"""
@@ -186,11 +296,16 @@ class Player:
             self.agility += 1
         elif stat_name == "intelligence":
             self.intelligence += 1
+            # Оновлюємо максимальну ману
+            old_max_mana = self.max_mana
+            self.max_mana = self._calculate_max_mana()
+            self.mana += (self.max_mana - old_max_mana)
         elif stat_name == "stamina":
             self.stamina += 1
-            old_max = self.max_health
+            # Оновлюємо максимальне здоров'я
+            old_max_health = self.max_health
             self.max_health = self._calculate_max_health()
-            self.health += (self.max_health - old_max)
+            self.health += (self.max_health - old_max_health)
         elif stat_name == "charisma":
             self.charisma += 1
         else:
@@ -210,6 +325,10 @@ class Player:
         
         return bonus
     
+    # =====================================================
+    # МАНА ТА ЗДІБНОСТІ
+    # =====================================================
+    
     def use_mana(self, amount: int) -> bool:
         """Витрачає ману"""
         if self.mana >= amount:
@@ -223,49 +342,34 @@ class Player:
         self.mana = min(self.mana + amount, self.max_mana)
         return self.mana - old_mana
     
-    def regenerate_mana(self, in_combat: bool = False) -> int:
-        """Пасивна регенерація мани на основі інтелекту"""
-        if self.mana >= self.max_mana:
-            return 0
-        
-        if in_combat:
-            regen_amount = max(1, int(self.intelligence * 0.2))
-        else:
-            regen_amount = self.intelligence + 1
-        
-        return self.restore_mana(regen_amount)
-    
     def can_use_ability(self, ability_name: str) -> bool:
         """Перевіряє чи може використати здібність"""
-        abilities = {
-            "mage": {"fireball": 5},
-            "warrior": {"mighty_strike": 6},
-            "paladin": {"divine_shield": 5, "smite_undead": 5},
-            "rogue": {"poison_strike": 4}
-        }
+        if ability_name not in self.class_abilities:
+            return False
         
-        class_abilities = abilities.get(self.character_class, {})
-        mana_cost = class_abilities.get(ability_name, 999)
+        ability = self.class_abilities[ability_name]
+        mana_cost = ability.get("mana_cost", 0)
         
         return self.mana >= mana_cost
     
-    def use_ability(self, ability_name: str):
-        """Використовує здібність (витрачає ману)"""
-        abilities = {
-            "mage": {"fireball": 5},
-            "warrior": {"mighty_strike": 6},
-            "paladin": {"divine_shield": 5, "smite_undead": 5},
-            "rogue": {"poison_strike": 4}
-        }
+    def use_ability(self, ability_name: str) -> bool:
+        """Використовує здібність"""
+        if not self.can_use_ability(ability_name):
+            return False
         
-        class_abilities = abilities.get(self.character_class, {})
-        mana_cost = class_abilities.get(ability_name, 0)
+        ability = self.class_abilities[ability_name]
+        mana_cost = ability.get("mana_cost", 0)
         
-        self.mana = max(0, self.mana - mana_cost)
+        self.mana -= mana_cost
+        return True
     
     def reset_battle_cooldowns(self):
         """Скидає кулдауни здібностей після бою"""
         self.ability_cooldowns = {}
+    
+    # =====================================================
+    # БОЙОВІ ХАРАКТЕРИСТИКИ
+    # =====================================================
     
     def get_armor_class(self) -> int:
         """Розраховує Armor Class (AC) як у D&D"""
@@ -295,7 +399,7 @@ class Player:
         return (stat - 10) // 2
     
     def get_attack_power(self) -> int:
-        """Розраховує силу атаки з урахуванням типу зброї"""
+        """Розраховує силу атаки"""
         weapon = self.equipment.get("weapon")
         
         if not weapon:
@@ -312,6 +416,7 @@ class Player:
         else:
             base = self.strength
         
+        # Додаємо бонуси від зброї
         base += weapon.get("strength_bonus", 0)
         base += weapon.get("agility_bonus", 0)
         base += weapon.get("intelligence_bonus", 0)
@@ -319,14 +424,36 @@ class Player:
         return max(1, base)
     
     def get_defense(self) -> int:
-        """Розраховує захист від усього спорядження"""
+        """Розраховує захист"""
         defense = self.stamina // 2
         defense += self.get_total_stat_bonus("stamina") // 2
         return max(0, defense)
     
     def get_dodge_chance(self) -> float:
-        """Розраховує шанс ухилення (у відсотках)"""
+        """Розраховує шанс ухилення"""
         return min(75.0, 5 + (self.agility * 0.5))
+    
+    def get_double_attack_chance(self) -> int:
+        """Шанс подвійного удару воїна"""
+        if self.character_class != "warrior":
+            return 0
+        
+        base_chance = 25
+        strength_bonus = max(0, (self.strength - 10) * 2)
+        return min(75, base_chance + strength_bonus)
+    
+    def get_critical_chance(self) -> int:
+        """Шанс критичного удару розбійника"""
+        if self.character_class != "rogue":
+            return 0
+        
+        base_chance = 25
+        agility_bonus = max(0, (self.agility - 10) * 2)
+        return min(75, base_chance + agility_bonus)
+    
+    # =====================================================
+    # ЗДОРОВ'Я ТА УРОН
+    # =====================================================
     
     def take_damage(self, amount: int) -> int:
         """Отримує урон і повертає фактичний урон"""
@@ -336,26 +463,18 @@ class Player:
         return actual_damage
     
     def heal(self, amount: int) -> int:
-        """Лікує персонажа і повертає кількість відновленого HP"""
+        """Лікує персонажа"""
         old_health = self.health
         self.health = min(self.health + amount, self.max_health)
         return self.health - old_health
     
-    def regenerate_health(self, in_combat: bool = False) -> int:
-        """Пасивна регенерація здоров'я на основі витривалості"""
-        if self.health >= self.max_health:
-            return 0
-        
-        if in_combat:
-            regen_amount = max(1, int(self.stamina * 0.25))
-        else:
-            regen_amount = self.stamina + 1
-        
-        return self.heal(regen_amount)
-    
     def is_alive(self) -> bool:
         """Перевіряє чи живий персонаж"""
         return self.health > 0
+    
+    # =====================================================
+    # ЕКОНОМІКА
+    # =====================================================
     
     def add_gold(self, amount: int):
         """Додає золото"""
@@ -369,6 +488,10 @@ class Player:
             return True
         return False
     
+    # =====================================================
+    # ІНВЕНТАР ТА ЕКІПІРУВАННЯ
+    # =====================================================
+    
     def equip_item(self, inventory_index: int) -> bool:
         """Екіпірує предмет з інвентаря"""
         if inventory_index < 0 or inventory_index >= len(self.inventory):
@@ -381,6 +504,7 @@ class Player:
         
         slot = item.get("slot")
         
+        # Обробка подвійних слотів (кільця та сережки)
         if slot in ["ring_1", "ring_2"]:
             if self.equipment.get("ring_1") is None:
                 target_slot = "ring_1"
@@ -423,6 +547,50 @@ class Player:
         self.equipment[slot] = None
         
         return True
+    
+    # =====================================================
+    # БАФИ ТА ЕФЕКТИ
+    # =====================================================
+    
+    def get_active_buff_bonus(self, stat_name: str) -> int:
+        """Отримує бонус від активних бафів"""
+        bonus = 0
+        active_buffs = []
+        
+        for effect in self.active_effects:
+            if effect.get("type") == "buff" and effect.get("stat") == stat_name:
+                try:
+                    expires_at = datetime.fromisoformat(effect["expires_at"])
+                    if datetime.now() < expires_at:
+                        bonus += effect.get("value", 0)
+                        active_buffs.append(effect)
+                except:
+                    pass
+        
+        # Оновлюємо список - залишаємо тільки активні
+        self.active_effects = active_buffs
+        
+        return bonus
+    
+    def clean_expired_buffs(self):
+        """Видаляє прострочені бафи"""
+        active = []
+        for effect in self.active_effects:
+            if effect.get("type") == "buff":
+                try:
+                    expires_at = datetime.fromisoformat(effect["expires_at"])
+                    if datetime.now() < expires_at:
+                        active.append(effect)
+                except:
+                    pass
+            else:
+                active.append(effect)
+        
+        self.active_effects = active
+    
+    # =====================================================
+    # ВІДОБРАЖЕННЯ
+    # =====================================================
     
     def get_equipment_display(self) -> str:
         """Форматує відображення екіпірування"""
@@ -467,7 +635,7 @@ class Player:
         return "\n".join(equipment_lines)
     
     def get_total_stats_display(self) -> str:
-        """Показує характеристики з урахуванням бонусів від спорядження"""
+        """Показує характеристики з бонусами"""
         str_bonus = self.get_total_stat_bonus("strength")
         agi_bonus = self.get_total_stat_bonus("agility")
         int_bonus = self.get_total_stat_bonus("intelligence")
@@ -484,114 +652,9 @@ class Player:
         
         return "\n".join(lines)
     
-    def get_double_attack_chance(self) -> int:
-        """Шанс подвійного удару воїна (залежить від сили)"""
-        if self.character_class != "warrior":
-            return 0
-        
-        base_chance = 25
-        strength_bonus = max(0, (self.strength - 10) * 2)
-        return min(75, base_chance + strength_bonus)
-    
-    def get_critical_chance(self) -> int:
-        """Шанс критичного удару розбійника (залежить від спритності)"""
-        if self.character_class != "rogue":
-            return 0
-        
-        base_chance = 25
-        agility_bonus = max(0, (self.agility - 10) * 2)
-        return min(75, base_chance + agility_bonus)
-
-    def get_active_buff_bonus(self, stat_name: str) -> int:
-        """Отримує бонус від активних бафів для характеристики"""
-        from datetime import datetime
-        
-        bonus = 0
-        active_buffs = []
-        
-        for effect in self.active_effects:
-            if effect.get("type") == "buff" and effect.get("stat") == stat_name:
-                try:
-                    expires_at = datetime.fromisoformat(effect["expires_at"])
-                    if datetime.now() < expires_at:
-                        bonus += effect.get("value", 0)
-                        active_buffs.append(effect)
-                except:
-                    pass
-        
-        # Оновлюємо список - залишаємо тільки активні
-        self.active_effects = active_buffs
-        
-        return bonus
-    
-    def clean_expired_buffs(self):
-        """Видаляє прострочені бафи"""
-        from datetime import datetime
-        
-        active = []
-        for effect in self.active_effects:
-            if effect.get("type") == "buff":
-                try:
-                    expires_at = datetime.fromisoformat(effect["expires_at"])
-                    if datetime.now() < expires_at:
-                        active.append(effect)
-                except:
-                    pass
-            else:
-                active.append(effect)
-        
-        self.active_effects = active
-
-    def apply_offline_regeneration(self):
-        """Застосовує регенерацію за час офлайну на основі stamina та intelligence"""
-        if not self.last_login:
-            from datetime import datetime
-            self.last_login = datetime.now().isoformat()
-            return {"hp": 0, "mana": 0, "offline_time": 0}
-        
-        from datetime import datetime
-        
-        try:
-            if isinstance(self.last_login, str):
-                last_login_time = datetime.fromisoformat(self.last_login.split('.')[0])
-            else:
-                last_login_time = self.last_login
-            
-            now = datetime.now()
-            offline_seconds = int((now - last_login_time).total_seconds())
-            
-            if offline_seconds < 60:
-                self.last_login = now.isoformat()
-                return {"hp": 0, "mana": 0, "offline_time": 0}
-            
-            # Кожні 60 секунд = 1 тік регенерації
-            regen_ticks = offline_seconds // 60
-            
-            # HP: (stamina + 1) за хвилину
-            hp_per_tick = self.stamina + 1
-            hp_regen = min(hp_per_tick * regen_ticks, self.max_health - self.health)
-            
-            # Мана: (intelligence + 1) за хвилину
-            mana_per_tick = self.intelligence + 1
-            mana_regen = min(mana_per_tick * regen_ticks, self.max_mana - self.mana)
-            
-            if hp_regen > 0:
-                self.health = min(self.health + hp_regen, self.max_health)
-            
-            if mana_regen > 0:
-                self.mana = min(self.mana + mana_regen, self.max_mana)
-            
-            self.last_login = now.isoformat()
-            
-            return {
-                "hp": hp_regen,
-                "mana": mana_regen,
-                "offline_time": offline_seconds
-            }
-        except:
-            from datetime import datetime
-            self.last_login = datetime.now().isoformat()
-            return {"hp": 0, "mana": 0, "offline_time": 0}
+    # =====================================================
+    # СЕРІАЛІЗАЦІЯ
+    # =====================================================
     
     def to_dict(self) -> Dict:
         """Конвертує у словник для збереження в БД"""
@@ -626,7 +689,9 @@ class Player:
             "total_damage_taken": self.total_damage_taken,
             "active_effects": json.dumps(self.active_effects, ensure_ascii=False),
             "ability_cooldowns": json.dumps(self.ability_cooldowns, ensure_ascii=False),
-            "last_login": self.last_login,
+            # Підтримка обох полів для сумісності
+            "last_login": self.last_regeneration_time,
+            "last_regeneration": self.last_regeneration_time
         }
     
     @classmethod
@@ -639,18 +704,28 @@ class Player:
             character_class=data.get("class", "warrior")
         )
         
+        # Основні дані
         player.level = data.get("level", 1)
         player.experience = data.get("experience", 0)
         player.gold = data.get("gold", 100)
         player.free_points = data.get("free_points", 5)
-        player.last_login = data.get("last_login")
         
+        # ✨ Міграція полів регенерації (підтримка старих баз)
+        if "last_regeneration" in data and data["last_regeneration"]:
+            player.last_regeneration_time = data["last_regeneration"]
+        elif "last_login" in data and data["last_login"]:
+            player.last_regeneration_time = data["last_login"]
+        else:
+            player.last_regeneration_time = datetime.now().isoformat()
+        
+        # Характеристики
         player.strength = data.get("strength", 10)
         player.agility = data.get("agility", 10)
         player.intelligence = data.get("intelligence", 10)
         player.stamina = data.get("stamina", 10)
         player.charisma = data.get("charisma", 10)
         
+        # Здоров'я та мана
         player.max_health = data.get("max_health", 100)
         player.health = min(data.get("health", player.max_health), player.max_health)
         
@@ -661,6 +736,7 @@ class Player:
             player.max_mana = player._calculate_max_mana()
             player.mana = player.max_mana
         
+        # Екіпірування
         try:
             equipment_data = json.loads(data.get("equipment", "{}"))
             default_equipment = {
@@ -679,34 +755,41 @@ class Player:
                 'earring_2': None, 'amulet': None
             }
         
+        # Інвентар
         try:
             player.inventory = json.loads(data.get("inventory", "[]"))
         except:
             player.inventory = []
         
+        # Квести
         try:
             player.quests = json.loads(data.get("quests", "{}"))
         except:
             player.quests = {}
         
+        # Досягнення
         try:
             player.achievements = json.loads(data.get("achievements", "[]"))
         except:
             player.achievements = []
         
+        # Активні ефекти
         try:
             player.active_effects = json.loads(data.get("active_effects", "[]"))
         except:
             player.active_effects = []
         
+        # Кулдауни здібностей
         try:
             player.ability_cooldowns = json.loads(data.get("ability_cooldowns", "{}"))
         except:
             player.ability_cooldowns = {}
         
+        # Інші дані
         player.current_location = data.get("current_location", "city")
         player.last_daily_reward = data.get("last_daily_reward")
         
+        # Статистика
         player.monsters_killed = data.get("monsters_killed", 0)
         player.quests_completed = data.get("quests_completed", 0)
         player.total_gold_earned = data.get("total_gold_earned", 100)
