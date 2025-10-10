@@ -25,7 +25,11 @@ async def cmd_start(message: types.Message):
         # Гравець вже існує - вітаємо повернення
         player = Player.from_dict(player_data)
         
+<<<<<<< HEAD
         # ✨ ВИКОРИСТОВУЄМО ЄДИНУ СИСТЕМУ РЕГЕНЕРАЦІЇ
+=======
+        # ✨ Застосовуємо офлайн регенерацію
+>>>>>>> dbfefd437cfb4e6361874e9c11e0aa09b24b1cd4
         regen_result = player.apply_regeneration()
         
         # Зберігаємо оновлений стан
