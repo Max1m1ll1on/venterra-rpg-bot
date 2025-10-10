@@ -672,15 +672,12 @@ async def return_to_city_button(message: types.Message):
         
         city_text += (
             f"Тут ви можете відпочити та підготуватися до нових пригод!\n\n"
-<<<<<<< HEAD
             f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
             f"💙 Мана: {player.mana}/{player.max_mana}"
             f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
             f"💙 Мана: {player.mana}/{player.max_mana}"
-=======
-            "❤️ Здоров'я: {player.health}/{player.max_health}\n"
-            "💙 Мана: {player.mana}/{player.max_mana}"
->>>>>>> dbfefd437cfb4e6361874e9c11e0aa09b24b1cd4
+            f"❤️ Здоров'я: {player.health}/{player.max_health}\n"
+            f"💙 Мана: {player.mana}/{player.max_mana}"
         )
         
         await message.answer(
